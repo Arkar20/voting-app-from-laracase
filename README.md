@@ -1,1 +1,1 @@
-# voting-app-from-laracase
+# voting-app-from-laracast
