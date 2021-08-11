@@ -3,6 +3,8 @@
 @import 'tailwindcss/utilities';
 
 
+[x-cloak] { display: none !important; }
+
 .replies-section::before {
     position: absolute;
     display: block;

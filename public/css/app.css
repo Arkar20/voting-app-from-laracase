@@ -32174,6 +32174,9 @@ select {
   -webkit-line-clamp: unset;
 }
 
+[x-cloak] { display: none !important;
+}
+
 .replies-section::before {
   position: absolute;
   display: block;

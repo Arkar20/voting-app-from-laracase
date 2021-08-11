@@ -32,7 +32,7 @@
      {{-- start of ideas cards --}}
         <div class="ideas-container space-y-6 my-4">
             {{-- start of single card --}}
-            <div class="idea-container max-width-100 bg-white rounded-md  shadow-lg flex py-6">
+            <div class="idea-container max-width-100 bg-white rounded-md  shadow-lg flex py-6 relative">
                 <div class="w-20 flex-col ml-10 mt-6">
                    <p class="text-center uppercase text-2xl">12 </p>
                    <p class="text-center uppercase text-gray-400 text-md">Votes</p>
@@ -51,11 +51,11 @@
                         <div class="">
                             <p class="font-semibold text-3xl">A ramdom title can go here.</p>
                             <p class="mt-3 line-clamp-3">
-                                Something 
+                                Sunt esse deserunt tempor velit Lorem dolor cillum sit culpa. Veniam aliquip do tempor dolor aliqua proident velit culpa ullamco anim elit. Aliqua laborum enim sunt occaecat laborum deserunt sint reprehenderit nulla. Officia nulla nulla ex nulla deserunt. Voluptate incididunt cupidatat qui sint consequat velit fugiat ad tempor tempor sit ut. Officia dolore irure pariatur aliquip enim sint consequat velit incididunt consequat. 
                             </p>
                         </div>
                     </div>
-                    <div class="flex w-full justify-around mt-10 mx-2">
+                    <div class="flex  mt-10 mx-2  absolute bottom-3">
                         <div class="flex">
                               <p class=" rounded-3xl py-2 px-2 text-gray-600 text-xs">10 days ago</p>
                                 <p class=" py-2 px-2 text-gray-600 text-xs">&bull;</p>
@@ -63,9 +63,15 @@
                                 <p class=" py-2 px-2 text-gray-600 text-xs">&bull;</p>
                               <p class=" rounded-3xl py-2 px-2 text-gray-800 text-xs">3 comments</p>
                         </div>
-                          <div class="flex space-x-1">
+                          <div class="flex space-x-1" 
+                                   
+                                x-data="{ openSideMenu: false }"
+
+                          >
                                 <button class="w-20 rounded-3xl  text-xs bg-gray-300 hover:text-white hover:bg-green-500 transition ease-in duration-400">Open</button>
-                                <button class="relative w-10 rounded-3xl flex justify-center items-center transition duration-150 text-xs bg-gray-300 hover:bg-gray-400">
+                                <button
+                                @click="openSideMenu = ! openSideMenu"
+                                class="relative w-10 rounded-3xl flex justify-center items-center transition duration-150 text-xs bg-gray-300 hover:bg-gray-400">
                                         <svg  xmlns="http://www.w3.org/2000/svg" width="15" height="4" viewBox="0 0 27 6">
                                             <g id="Icon_feather-more-horizontal" data-name="Icon feather-more-horizontal" transform="translate(-4.5 -15)">
                                                 <path id="Path_2" data-name="Path 2" d="M19.5,18A1.5,1.5,0,1,1,18,16.5,1.5,1.5,0,0,1,19.5,18Z" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
@@ -74,7 +80,12 @@
                                             </g>
                                           </svg>
                                           {{-- start of popup     --}}
-                                          <div class="w-40 absolute bg-white shadow-md ml-40 top-10">
+                                          <div 
+                                          x-cloak  
+                                            x-show.transition.top.left.duration.200ms="openSideMenu"
+                                            @click.away="openSideMenu = ! openSideMenu"
+                                            @keydown.escape.window="openSideMenu =  false"
+                                          class="w-40 absolute bg-white shadow-md ml-40 top-10">
                                               <ul>
                                                   <li class="p-3 hover:bg-gray-100">Lock The Idea</li>
                                                   <li class="p-3 hover:bg-gray-100 hover:text-red-600">Delete The Idea</li>

@@ -67,14 +67,22 @@
             <div class="buttons-section w-full flex justify-between mt-4  ">
                 <div class="left ">
                     <div class="flex space-x-1">
-                        <div class="relative">
+                        <div 
+                         x-data="{openSideMenu:false}"
+                        class="relative">
                                     <button
+                                        @click="openSideMenu = ! openSideMenu"
                                             type="submit"
                                             class="flex items-center justify-center h-11 text-xs bg-blue-400 text-white font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3"
                                         >
                                      <span class="ml-1">Reply</span>
                                  </button>
-                                 <div class="z-10 hidden absolute w-80 bg-white rounded-md shadow-lg border border-1 border-gray-200 py-1 px-2">
+                                 <div 
+                                   x-cloak  
+                                            x-show.transition.top.left.duration.200ms="openSideMenu"
+                                            @click.away="openSideMenu = ! openSideMenu"
+                                            @keydown.escape.window="openSideMenu =  false"
+                                 class="z-10  absolute w-80 bg-white rounded-md shadow-lg border border-1 border-gray-200 py-1 px-2">
                                      <form action="#" class="space-y-2">
                                             <textarea name="reply"
                                             class="w-full border border-1 border-gray-200 rounded-lg shadow-md focus:border-green-400"
@@ -98,8 +106,11 @@
                                      </form>
                                  </div>
                         </div>
-                        <div class="relative">
+                        <div 
+                        x-data="{openSideMenu:false}"
+                        class="relative">
                              <button
+                                @click="openSideMenu=!openSideMenu"
                                  type="submit"
                                  class="  justify-between h-11 text-xs bg-gray-400 text-white font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3"
                              >
@@ -111,7 +122,12 @@
                              </div>
                              </button>
 
-                                 <div class="absolute top-10 z-10 bg-white rounded-lg shadow-xl font-normal text-black w-56 py-1 px-2">
+                                 <div 
+                                        x-cloak  
+                                            x-show.transition.top.left.duration.200ms="openSideMenu"
+                                            @click.away="openSideMenu = ! openSideMenu"
+                                            @keydown.escape.window="openSideMenu =  false"
+                                 class="absolute top-10 z-10 bg-white rounded-lg shadow-xl font-normal text-black w-56 py-1 px-2">
                                     <ul>
                                         <li class="py-4 px-2 flex justify-center space-x-4">
                                             <input type="radio" name="option1" checked="" class="text-green-400 border-none"/>
