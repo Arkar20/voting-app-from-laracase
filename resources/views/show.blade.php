@@ -67,22 +67,90 @@
             <div class="buttons-section w-full flex justify-between mt-4  ">
                 <div class="left ">
                     <div class="flex space-x-1">
-
-                        <button
+                        <div class="relative">
+                                    <button
+                                            type="submit"
+                                            class="flex items-center justify-center h-11 text-xs bg-blue-400 text-white font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3"
+                                        >
+                                     <span class="ml-1">Reply</span>
+                                 </button>
+                                 <div class="z-10 hidden absolute w-80 bg-white rounded-md shadow-lg border border-1 border-gray-200 py-1 px-2">
+                                     <form action="#" class="space-y-2">
+                                            <textarea name="reply"
+                                            class="w-full border border-1 border-gray-200 rounded-lg shadow-md focus:border-green-400"
+                                            rows="3"
+                                            placeholder="Reply Your Message"
+                                            ></textarea>
+                                            <div class="flex space-x-4">
+                                                    <button
+                                                            type="submit"
+                                                            class="flex items-center justify-center h-11 text-xs bg-blue-400 text-white font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3"
+                                                        >
+                                                    <span class="ml-1">Post Comment</span>
+                                                </button>
+                                                    <button
+                                                            type="submit"
+                                                            class="flex items-center justify-center h-11 text-xs bg-gray-400 text-white font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3"
+                                                        >
+                                                    <span class="ml-1">Attach</span>
+                                                </button>
+                                            </div>
+                                     </form>
+                                 </div>
+                        </div>
+                        <div class="relative">
+                             <button
                                  type="submit"
-                                 class="flex items-center justify-center h-11 text-xs bg-blue-400 text-white font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3"
+                                 class="  justify-between h-11 text-xs bg-gray-400 text-white font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3"
                              >
-                                 <span class="ml-1">Submit</span>
-                             </button>
-                          <button
-                                 type="submit"
-                                 class="flex items-between justify-between h-11 text-xs bg-gray-400 text-white font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3"
-                             >
+                             <div class="flex space-x-4">
                                  <span class="ml-1">Set Status</span>
                                  <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                                  </svg>
+                             </div>
                              </button>
+
+                                 <div class="absolute top-10 z-10 bg-white rounded-lg shadow-xl font-normal text-black w-56 py-1 px-2">
+                                    <ul>
+                                        <li class="py-4 px-2 flex justify-center space-x-4">
+                                            <input type="radio" name="option1" checked="" class="text-green-400 border-none"/>
+                                           <span>Option 1</span>
+                                        </li>
+                                        <li class="py-4 px-2 flex justify-center space-x-4">
+                                            <input type="radio" name="option1" class=" focus:bg-blue-400"/>
+                                           <span>Option 1</span>
+                                        </li>
+                                        <li class="py-4 px-2 flex justify-center space-x-4">
+                                            <input type="radio" name="option1" class=" focus:bg-blue-400"/>
+                                           <span>Option 1</span>
+                                        </li>
+                                        <li class="py-4 px-2 flex justify-center space-x-4">
+                                            <input type="radio" name="option1" class=" focus:bg-blue-400"/>
+                                           <span>Option 1</span>
+                                        </li>
+                                    </ul>
+                                    <textarea name="reply"
+                                            class="w-full border border-1 border-gray-200 rounded-lg shadow-md focus:border-green-400 placeholder-gray-200"
+                                            rows="3"
+                                            placeholder="Add an tag (Optional)"
+                                            ></textarea>
+                                    <div class="flex justify-between mt-3">
+                                                <button class="flex items-center justify-center h-11 text-xs bg-gray-400 text-white font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3">
+                                                        Attach
+                                                </button>
+                                                <button
+                                                    type="submit"
+                                                    class="flex items-center justify-center h-11 text-xs bg-blue-400 text-white font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3"
+                                                >
+                                                    <span class="ml-1">Submit</span>
+                                                </button>
+                                        </div>
+                                </div>
+
+                             </button>
+                        </div>
+                         
                     </div>
                 </div>
                 <div class="right-btngp ">
@@ -102,7 +170,7 @@
         {{-- end of buttons --}}
 
         {{-- start of replies  --}}
-            <div class="ml-10 replies-section relative flex-col mt-4 space-y-6">
+            <div class="ml-10 replies-section relative flex-col my-4 space-y-6">
                {{-- start of singel reply   --}}
                 <div class="reply-section relative flex border border-1 border-gray-300 cursor-pointer   hover:border-green-500 rounded-md shadow-md">
                     <div class="flex-none">
