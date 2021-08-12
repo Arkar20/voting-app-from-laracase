@@ -67,7 +67,7 @@
                             <div class="flex my-3 space-x-4">
                                   <p class=" rounded-3xl  text-gray-600 text-xs">{{$idea->created_at->diffForHumans()}}</p>
                                     <p class="  text-gray-600 text-xs">&bull;</p>
-                                  <p class=" rounded-3xl  text-gray-600 text-xs">Category</p>
+                                  <p class=" rounded-3xl  text-gray-600 text-xs">{{$idea->category->name}}</p>
                                     <p class="  text-gray-600 text-xs">&bull;</p>
                                   <p class=" rounded-3xl  text-gray-800 text-xs">3 comments</p>
                             </div>
@@ -85,7 +85,9 @@
                                      <button class=" p-2 bg-gray-200 font-weight-bold border border-gray-200 hover:border-gray-400 transition duration-150 ease-in uppercase rounded-xl">Vote</button>
 
                           </div>
-                                <button class="w-20 rounded-3xl h-8  text-xs bg-gray-300 hover:text-white hover:bg-green-500 transition ease-in duration-400">Open</button>
+                                <button class=" {{$idea->status->getClasses()}} w-20 rounded-3xl h-8  text-xs text-white  hover:text-white hover:bg-green-500 transition ease-in duration-400">
+                                    {{$idea->status->name}}</button>
+                                </button>
                                 <button
                                 @click="openSideMenu = ! openSideMenu"
                                 class="relative w-10 h-8 rounded-3xl flex justify-center items-center transition duration-150 text-xs bg-gray-300 hover:bg-gray-400">
@@ -118,7 +120,7 @@
             </div>
             {{-- end of single card --}}
         @endforeach
-            
+            {{$ideas->links()}}
         </div>
      {{-- end of ideas cards --}}
 
