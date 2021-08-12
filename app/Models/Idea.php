@@ -12,6 +12,7 @@ class Idea extends Model
     use HasFactory, Sluggable;
 
     protected $guarded = [];
+
     public $PAGINATED_NUMBER = 10;
     public function sluggable(): array
     {

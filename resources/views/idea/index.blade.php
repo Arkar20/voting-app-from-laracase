@@ -33,7 +33,17 @@
         <div class="ideas-container space-y-6 my-4">
             @foreach ($ideas as $idea)
             {{-- start of single card --}}
-            <div class="idea-container max-width-100 bg-white rounded-md  shadow-lg flex py-6 relative">
+            <div 
+            x-data 
+            @click="
+                console.log($event.target.tagName.toLowerCase())
+                const target=$event.target.tagName.toLowerCase()
+                const ignores=['button','svg']
+
+                if(! ignores.includes(target) )
+                    $event.target.closest('.idea-text').querySelector('.idea-link').click()
+            "
+            class="idea-container max-width-100 bg-white rounded-md  shadow-lg flex py-6 relative">
                 <div class="hidden md:block w-20 flex-col md:ml-10 mt-6">
                    <p class="text-center uppercase text-2xl">12 </p>
                    <p class="text-center uppercase text-gray-400 text-md">Votes</p>
@@ -46,13 +56,11 @@
                                 class=" w-14 h-14 rounded-full"
                                 src='https://avataaars.io/?avatarStyle=Circle&topType=ShortHairTheCaesarSidePart&accessoriesType=Sunglasses&hairColor=BrownDark&facialHairType=BeardMajestic&facialHairColor=BrownDark&clotheType=ShirtScoopNeck&clotheColor=Gray01&eyeType=Side&eyebrowType=RaisedExcited&mouthType=Twinkle&skinColor=Light'/>
                         </a>
-                <div class="flex-col w-full">
-                      <div>
-                          <a href="{{route('idea.show',$idea->slug)}}" class="font-semibold text:2xl md:text-3xl">{{$idea->title}}</a>
+                <div class="idea-text flex-col w-full">
+                          <a href="{{route('idea.show',$idea->slug)}}" class="idea-link font-semibold text:2xl md:text-3xl">{{$idea->title}}</a>
                           <p class="mt-3 line-clamp-3">
                                  {{$idea->desc}}  
                         </p>
-                      </div>
                     
                     <div class="flex-col md:flex-row justify-between mt-4 md:mt-10   ">
                         <div>
