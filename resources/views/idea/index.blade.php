@@ -31,6 +31,7 @@
 
      {{-- start of ideas cards --}}
         <div class="ideas-container space-y-6 my-4">
+            @foreach ($ideas as $idea)
             {{-- start of single card --}}
             <div class="idea-container max-width-100 bg-white rounded-md  shadow-lg flex py-6 relative">
                 <div class="hidden md:block w-20 flex-col md:ml-10 mt-6">
@@ -47,16 +48,16 @@
                         </a>
                 <div class="flex-col w-full">
                       <div>
-                          <p class="font-semibold text:2xl md:text-3xl">A ramdom title can go here.</p>
+                          <a href="{{route('idea.show',$idea->slug)}}" class="font-semibold text:2xl md:text-3xl">{{$idea->title}}</a>
                           <p class="mt-3 line-clamp-3">
-                              Sunt esse deserunt tempor velit Lorem dolor cillum sit culpa. Veniam aliquip do tempor dolor aliqua proident velit culpa ullamco anim elit. Aliqua laborum enim sunt occaecat laborum deserunt sint reprehenderit nulla. Officia nulla nulla ex nulla deserunt. Voluptate incididunt cupidatat qui sint consequat velit fugiat ad tempor tempor sit ut. Officia dolore irure pariatur aliquip enim sint consequat velit incididunt consequat. 
-                          </p>
+                                 {{$idea->desc}}  
+                        </p>
                       </div>
                     
                     <div class="flex-col md:flex-row justify-between mt-4 md:mt-10   ">
                         <div>
                             <div class="flex my-3 space-x-4">
-                                  <p class=" rounded-3xl  text-gray-600 text-xs">10 days ago</p>
+                                  <p class=" rounded-3xl  text-gray-600 text-xs">{{$idea->created_at->diffForHumans()}}</p>
                                     <p class="  text-gray-600 text-xs">&bull;</p>
                                   <p class=" rounded-3xl  text-gray-600 text-xs">Category</p>
                                     <p class="  text-gray-600 text-xs">&bull;</p>
@@ -108,6 +109,8 @@
                 </div>
             </div>
             {{-- end of single card --}}
+        @endforeach
+            
         </div>
      {{-- end of ideas cards --}}
 

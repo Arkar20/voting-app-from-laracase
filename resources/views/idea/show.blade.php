@@ -1,7 +1,7 @@
 <x-app-layout>
     <div>
         {{-- start of naviagation  --}}
-               <a href="#" class="flex items-center space-x-1">
+               <a href="{{route('idea.index')}}" class="flex items-center space-x-1">
                     <svg class="w-4 h-4 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                          </svg>
@@ -21,24 +21,24 @@
                     <div class="flex  ">
                       
                         <div class="">
-                            <p class="font-semibold text-3xl">A ramdom title can go here.</p>
+                            <p class="font-semibold text-3xl">{{$idea->title}}</p>
                             <p class="mt-3 line-clamp-3">
-                               Nisi excepteur fugiat quis eu voluptate et duis ullamco. Sit proident culpa sunt cillum qui culpa. Aliqua occaecat aliquip pariatur sit nostrud tempor cillum tempor voluptate excepteur adipisicing. Enim non fugiat exercitation eu pariatur sit sint ullamco excepteur. Magna ut nulla sunt do veniam excepteur occaecat elit sint reprehenderit magna nostrud. Nostrud dolor commodo officia ullamco laborum dolor. Aute sunt quis duis dolor fugiat qui ipsum pariatur in esse aliquip nisi et sint.
+                                {{$idea->desc}}
                             </p>
                         </div>
                     </div>
-                    <div class="flex w-full justify-between mt-10 md:mx-2 mx:1">
+                    <div class="flex w-full justify-between mt-10 md:mx-2 mx-1 ">
                         <div class="flex items-center text-xs text-gray-400 font-semibold space-x-2">
                                 <div class="hidden md:block font-bold text-gray-900">John Doe</div>
                                 <div class="hidden md:block">&bull;</div>
-                                <div>10 hours ago</div>
+                                <div>{{$idea->created_at->diffForHumans()}}</div>
                                 <div>&bull;</div>
                                 <div>Category 1</div>
                                 <div>&bull;</div>
                                 <div class="text-gray-900">3 Comments</div>
                         </div>
-                          <div class="flex space-x-1">
-                                <button class="relative w-10 rounded-3xl flex justify-center items-center transition duration-150 text-xs bg-gray-300 hover:bg-gray-400">
+                          <div class="ml-4 h-100 flex items-center align-bottom">
+                                <button class="py-1  md:mr-10 relative w-10 rounded-3xl flex justify-center items-center transition duration-150 text-xs bg-gray-300 hover:bg-gray-400">
                                         <svg  xmlns="http://www.w3.org/2000/svg" width="15" height="4" viewBox="0 0 27 6">
                                             <g id="Icon_feather-more-horizontal" data-name="Icon feather-more-horizontal" transform="translate(-4.5 -15)">
                                                 <path id="Path_2" data-name="Path 2" d="M19.5,18A1.5,1.5,0,1,1,18,16.5,1.5,1.5,0,0,1,19.5,18Z" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
