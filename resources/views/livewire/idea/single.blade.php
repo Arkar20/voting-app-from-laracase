@@ -163,18 +163,13 @@
                 <div class="right-btngp ">
                    <div class="flex justify-center items-center h-full space-x-2">
                         <button class="bg-gray-200 py-1 px-4 rounded-2xl flex flex-col items-center">
-                            <span class="leading-none text-xl">{{$idea->votes_count}}</span>
+                            <span class="leading-none text-xl">{{$votes_count}}</span>
                             <span class="leading-none text-sm">votes</span>
                         </button>
-                        <button class="bg-gray-200 py-1 px-4 rounded-2xl ">
-                              <svg  xmlns="http://www.w3.org/2000/svg" width="15" height="4" viewBox="0 0 27 6">
-                                            <g id="Icon_feather-more-horizontal" data-name="Icon feather-more-horizontal" transform="translate(-4.5 -15)">
-                                                <path id="Path_2" data-name="Path 2" d="M19.5,18A1.5,1.5,0,1,1,18,16.5,1.5,1.5,0,0,1,19.5,18Z" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
-                                                <path id="Path_3" data-name="Path 3" d="M30,18a1.5,1.5,0,1,1-1.5-1.5A1.5,1.5,0,0,1,30,18Z" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
-                                                <path id="Path_4" data-name="Path 4" d="M9,18a1.5,1.5,0,1,1-1.5-1.5A1.5,1.5,0,0,1,9,18Z" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
-                                            </g>
-                                          </svg>
-                        </button>
+                      <button 
+                    wire:click.prevent="handleVote"
+                    class="w-20 px-3 py-4 {{$hasVoted?'bg-blue-400 text-white':'bg-gray-200 text-gray-600'}}  font-weight-bold border border-gray-200 hover:border-gray-400 transition duration-150 ease-in uppercase rounded-xl">Vote</button>
+                  </div>
                    </div>
                 </div>
             </div>

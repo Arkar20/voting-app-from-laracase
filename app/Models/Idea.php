@@ -51,8 +51,18 @@ class Idea extends Model
             ->where('idea_id', $this->id)
             ->exists();
     }
-    public function getIsVotedAttribute()
+    public function vote($user = null)
     {
-        return $this->isVoted(3);
+        $user = $user ?: auth()->id();
+
+        return votes::create(['user_id' => $user, 'idea_id' => $this->id]);
+    }
+    public function removeVote($user = null)
+    {
+        $user = $user ?: auth()->id();
+
+        votes::where('user_id', $user)
+            ->where('idea_id', $this->id)
+            ->delete();
     }
 }
