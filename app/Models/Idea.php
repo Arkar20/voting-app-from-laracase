@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\votes;
 use App\Models\Status;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
@@ -14,6 +15,8 @@ class Idea extends Model
     use HasFactory, Sluggable;
 
     protected $guarded = [];
+    protected $with = ['category', 'status'];
+    protected $withCount = ['votes'];
 
     public static $PAGINATED_NUMBER = 10;
     public function sluggable(): array
@@ -35,5 +38,21 @@ class Idea extends Model
     public function status()
     {
         return $this->belongsTo(Status::class);
+    }
+    public function votes()
+    {
+        return $this->belongsToMany(User::class, 'votes');
+    }
+    public function isVoted($user = null)
+    {
+        $user = $user ?: auth()->id();
+
+        return votes::where('user_id', $user)
+            ->where('idea_id', $this->id)
+            ->exists();
+    }
+    public function getIsVotedAttribute()
+    {
+        return $this->isVoted(3);
     }
 }

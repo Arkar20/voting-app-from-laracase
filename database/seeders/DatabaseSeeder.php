@@ -26,9 +26,9 @@ class DatabaseSeeder extends Seeder
         // votes::factory(100)->create();
 
         // for votes for even user_ids
-        foreach (range(1, 20) as $user_id) {
-            foreach (range(1, 100) as $idea_id) {
-                if ($user_id % 2 === 0) {
+        foreach (range(1, 20) as $idea_id) {
+            foreach (range(1, 100) as $user_id) {
+                if ($idea_id % 2 === 0) {
                     votes::create([
                         'idea_id' => $idea_id,
                         'user_id' => $user_id,

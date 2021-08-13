@@ -10,12 +10,11 @@ class IdeaController extends Controller
     /**
      * @Route("/", name="idea.index")
      */
+
     public function index()
     {
         return view('idea.index', [
-            'ideas' => Idea::with('category', 'status')
-                ->latest()
-                ->simplePaginate(10),
+            'ideas' => Idea::latest()->simplePaginate(10),
         ]);
     }
     /**
