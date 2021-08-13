@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Idea;
+use App\Models\votes;
 use Illuminate\Http\Request;
 
 class IdeaController extends Controller
@@ -14,7 +15,13 @@ class IdeaController extends Controller
     public function index()
     {
         return view('idea.index', [
-            'ideas' => Idea::latest()->simplePaginate(10),
+            'ideas' => Idea::addSelect([
+                'voted_at_id' => votes::select('id')
+                    ->where('user_id', auth()->id())
+                    ->whereColumn('idea_id', 'ideas.id'),
+            ])
+                ->latest()
+                ->simplePaginate(10),
         ]);
     }
     /**

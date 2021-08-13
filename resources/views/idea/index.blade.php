@@ -43,12 +43,12 @@
                 if(! ignores.includes(target) )
                     $event.target.closest('.idea-text').querySelector('.idea-link').click()
             "
-            class="idea-container max-width-100 bg-white rounded-md  shadow-lg flex py-6 relative bg-black">
+            class="idea-container max-width-100 bg-white rounded-md  shadow-lg flex py-6 relative ">
                 <div class="hidden md:block w-20 flex-col md:ml-10 mt-6">
                    <p class="text-center uppercase text-2xl">{{$idea->votes_count}}</p>
                    <p class="text-center uppercase text-gray-400 text-md ">Vote </p>
                   <div class="mt-12 text-center ">
-                    <button class="w-20 px-3 py-4 {{$idea->is_voted?'bg-blue-400 text-white':'bg-gray-200 text-gray-600'}}  font-weight-bold border border-gray-200 hover:border-gray-400 transition duration-150 ease-in uppercase rounded-xl">Vote</button>
+                    <button class="w-20 px-3 py-4 {{$idea->voted_at_id?'bg-blue-400 text-white':'bg-gray-200 text-gray-600'}}  font-weight-bold border border-gray-200 hover:border-gray-400 transition duration-150 ease-in uppercase rounded-xl">Vote</button>
                   </div>
                 </div>
                   <a href="#" class="px-4 flex-none">
