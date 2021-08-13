@@ -2,17 +2,19 @@
 
 namespace Database\Factories;
 
-use App\Models\Status;
+use App\Models\Idea;
+use App\Models\User;
+use App\Models\votes;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class StatusFactory extends Factory
+class VotesFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Status::class;
+    protected $model = votes::class;
 
     /**
      * Define the model's default state.
@@ -22,7 +24,8 @@ class StatusFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word(),
+            'idea_id' => $this->faker->unique()->numberBetween(1, 100),
+            'user_id' => rand(1, 20),
         ];
     }
 }

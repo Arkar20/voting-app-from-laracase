@@ -52,21 +52,28 @@
 
         <main class="container mx-auto max-w-custom flex flex-col md:flex-row">
             <div class="w-70 mx-auto md:mx-0 md:mr-5 bg-white shadow-sm border-green-300">
-            <div class="vote-form  shadow-lg px-4 border-1 ">
+            
+
+                @if (Auth::check())
+                     {{-- start of vote form  --}}
+                <div class="vote-form  shadow-lg px-4 border-1 py-2">
                 <div class="vote-title py-4 space-y-2">
                     <h1 class="text-center text-xl ">Add and idea</h1>
                     <h1 class="text-center text-xs w-full ">Let Us know what you would like and we will take over</h1>
                 </div>
-                <form class="flex-col space-y-2">
+                <form class="flex-col space-y-2" action="{{route('idea.store')}}" method="post">
+                    @csrf
+
                     <div>
                         <input type="text" 
-                            class="w-full border-1 focus:border-green-400 rounded-3xl  border-gray-200 bg-gray-100 text-gray-100"
+                            class="w-full  border-1 focus:border-green-400 rounded-3xl  border-gray-200 bg-gray-100 text-gray-800"
                             placeholder="Enter your Ideas"
+                            name="title"
                             />
                     </div>
                     <div>
                         <select 
-                            class="w-full border-1 rounded-3xl focus:border-green-400   border-gray-200 bg-gray-100 text-gray-100"
+                            class="w-full border-1 rounded-3xl focus:border-green-400   border-gray-200 bg-gray-100 text-gray-800"
                             placeholder="Enter your Ideas"
                             >
                            
@@ -75,9 +82,10 @@
                     </div>
                     <div>
                         <textarea  
-                            class="w-full border-1 rounded-3xl  focus:border-green-400  border-gray-200 bg-gray-100 text-gray-100"
+                            class="w-full border-1 rounded-3xl  focus:border-green-400  border-gray-200 bg-gray-100 text-gray-800"
                             rows="6"
                             placeholder="Describe YOurself"
+                            name="desc"
                             >
                         </textarea>
                     </div>
@@ -97,6 +105,36 @@
 
                 </form>
             </div>
+                {{-- end of vote form  --}}
+                @else
+                {{-- start of unauthicated vote form  --}}
+                <div class="vote-form  shadow-lg px-4 border-1 py-2">
+                <div class="vote-title py-4 space-y-2">
+                    <h1 class="text-center text-xl ">Add and idea</h1>
+                    <h1 class="text-center text-xs w-full ">Participate By Loggin in.</h1>
+                </div>
+                <form class="flex-col space-y-2"  method="post">
+                    
+                    <div class="flex justify-between">
+                        <button class="flex items-center justify-center h-11 text-xs bg-gray-400 text-white font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3">
+                                Attach
+                        </button>
+
+                             <button
+                                type="submit"
+                                class="flex items-center justify-center h-11 text-xs bg-blue-400 text-white font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3"
+                            >
+                                <span class="ml-1">Submit</span>
+                            </button>
+                    </div>
+
+
+
+                </form>
+            </div>
+                {{-- end of unauthicated vote form  --}}
+               @endif
+
             </div>
             <div class="w-full px-2 md:px-0 md:w-175">
                 <nav class="hidden md:flex items-center justify-between text-xs">

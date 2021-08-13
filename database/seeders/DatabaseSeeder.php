@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\votes;
 use App\Models\Status;
 use Illuminate\Database\Seeder;
 
@@ -20,6 +21,20 @@ class DatabaseSeeder extends Seeder
             Status::create(['name' => $status]);
         }
         \App\Models\Category::factory(4)->create();
-        \App\Models\Idea::factory(20)->create();
+        \App\Models\Idea::factory(100)->create();
+        // for voting data
+        // votes::factory(100)->create();
+
+        // for votes for even user_ids
+        foreach (range(1, 20) as $user_id) {
+            foreach (range(1, 100) as $idea_id) {
+                if ($user_id % 2 === 0) {
+                    votes::create([
+                        'idea_id' => $idea_id,
+                        'user_id' => $user_id,
+                    ]);
+                }
+            }
+        }
     }
 }

@@ -13,7 +13,9 @@ class IdeaController extends Controller
     public function index()
     {
         return view('idea.index', [
-            'ideas' => Idea::with('category', 'status')->simplePaginate(10),
+            'ideas' => Idea::with('category', 'status')
+                ->latest()
+                ->simplePaginate(10),
         ]);
     }
     /**
@@ -22,5 +24,20 @@ class IdeaController extends Controller
     public function show(Idea $idea)
     {
         return view('idea.show', compact('idea'));
+    }
+    /**
+     * @Route("/", name="idea.store")
+     */
+    public function store(Request $request)
+    {
+        Idea::create([
+            'title' => $request->title,
+            'desc' => $request->desc,
+            'category_id' => 1,
+            'status_id' => 1,
+            'user_id' => 1,
+        ]);
+
+        return back();
     }
 }

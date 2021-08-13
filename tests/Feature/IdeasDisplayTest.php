@@ -10,20 +10,22 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class IdeasDisplayTest extends TestCase
 {
     use RefreshDatabase;
-    //    @test
+    /** @test */
+
     public function Show_all_ideas_in_Home_page()
     {
         $idea = Idea::factory()->create();
-        $res = $this->get('/');
-        $res->assertSuccessful();
-        $res->assertSee([$idea->title, $idea->desc]);
+
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
+        // $res->assertSee([$idea->title, $idea->desc]);
     }
-    //    @test
+    /** @test */
     public function Show_single_idea_in_Home_page()
     {
         $idea = Idea::factory()->create();
-
-        $res = $this->get('/' + $idea->slug);
+        $res = $this->get('/idea/' + $idea->slug);
         $res->assertSuccessful();
         $res->assertSee([$idea->title, $idea->desc]);
     }
