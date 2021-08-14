@@ -14,15 +14,7 @@ class IdeaController extends Controller
 
     public function index()
     {
-        return view('idea.index', [
-            'ideas' => Idea::addSelect([
-                'voted_at_id' => votes::select('id')
-                    ->where('user_id', auth()->id())
-                    ->whereColumn('idea_id', 'ideas.id'),
-            ])
-                ->latest()
-                ->simplePaginate(10),
-        ]);
+        return view('idea.index');
     }
     /**
      * @Route("/idea/{idea}", name="idea.show", name="idea.show")

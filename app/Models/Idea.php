@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\votes;
 use App\Models\Status;
 use App\Models\Category;
+use Illuminate\Support\Facades\DB;
 use App\Exceptions\RegisterException;
 use App\Exceptions\RemoveVoteException;
 use Illuminate\Database\Eloquent\Model;
@@ -77,5 +78,13 @@ class Idea extends Model
         } else {
             $voteToRemove->delete();
         }
+    }
+    public static function getIdeasStatusCounts()
+    {
+        return Idea::query()
+            ->selectRaw('count(*) as all_ideas')
+            ->selectRaw('count(case when status_id=1 then 1 end) as open_ideas')
+            ->get()
+            ->toArray();
     }
 }
