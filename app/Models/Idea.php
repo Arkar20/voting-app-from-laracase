@@ -6,6 +6,8 @@ use App\Models\User;
 use App\Models\votes;
 use App\Models\Status;
 use App\Models\Category;
+use App\Exceptions\RegisterException;
+use App\Exceptions\RemoveVoteException;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -55,14 +57,25 @@ class Idea extends Model
     {
         $user = $user ?: auth()->id();
 
-        return votes::create(['user_id' => $user, 'idea_id' => $this->id]);
+        if ($this->isVoted()) {
+            throw new RegisterException();
+        } else {
+            votes::create(['user_id' => $user, 'idea_id' => $this->id]);
+        }
     }
     public function removeVote($user = null)
     {
         $user = $user ?: auth()->id();
 
-        votes::where('user_id', $user)
-            ->where('idea_id', $this->id)
-            ->delete();
+        $voteToRemove = votes::where('user_id', $user)->where(
+            'idea_id',
+            $this->id
+        );
+
+        if (!$voteToRemove->exists()) {
+            throw new RemoveVoteException();
+        } else {
+            $voteToRemove->delete();
+        }
     }
 }

@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Idea;
 
 use App\Models\Idea;
 use Livewire\Component;
+use App\Exceptions\RegisterException;
+use App\Exceptions\RemoveVoteException;
 
 class Single extends Component
 {
@@ -27,11 +29,19 @@ class Single extends Component
             return redirect('/login');
         }
         if ($this->hasVoted) {
-            $this->idea->removeVote(auth()->id());
+            try {
+                $this->idea->removeVote(auth()->id());
+            } catch (RemoveVoteException $e) {
+                //do nothing
+            }
             $this->votes_count--;
-            $this->hasVoted = null;
+            $this->hasVoted = false;
         } else {
-            $this->idea->vote(auth()->id());
+            try {
+                $this->idea->vote(auth()->id());
+            } catch (RegisterException $e) {
+                //do nothing
+            }
             $this->votes_count++;
             $this->hasVoted = true;
         }
