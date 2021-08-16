@@ -28,11 +28,14 @@
                                 <div>&bull;</div>
                                 <div class="text-gray-900">3 Comments</div>
                         </div>
-                          <div class="ml-4 h-100 flex items-center align-bottom">
+                          <div class="mx-4 h-100 flex items-center align-bottom space-x-3">
                               <button class=" {{$idea->status->getClasses()}} w-24 rounded-3xl h-8  text-xs text-white   transition ease-in duration-400">
                                     {{$idea->status->name}}</button>
                                 </button>
-                                <button class="py-1  md:mr-10 relative w-10 rounded-3xl flex justify-center items-center transition duration-150 text-xs bg-gray-300 hover:bg-gray-400">
+                                         <button
+                                            x-data="{openSideMenu:false}"
+                                 @click="openSideMenu = ! openSideMenu"
+                                class="relative w-10 h-8 z-10 rounded-3xl flex justify-center items-center transition duration-150 text-xs bg-gray-300 hover:bg-gray-400">
                                         <svg  xmlns="http://www.w3.org/2000/svg" width="15" height="4" viewBox="0 0 27 6">
                                             <g id="Icon_feather-more-horizontal" data-name="Icon feather-more-horizontal" transform="translate(-4.5 -15)">
                                                 <path id="Path_2" data-name="Path 2" d="M19.5,18A1.5,1.5,0,1,1,18,16.5,1.5,1.5,0,0,1,19.5,18Z" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
@@ -41,10 +44,22 @@
                                             </g>
                                           </svg>
                                           {{-- start of popup     --}}
-                                          <div class="w-40 hidden  absolute bg-white shadow-md ml-40 top-10">
+                                          <div 
+                                          x-cloak  
+                                            x-show.transition.top.left.duration.200ms="openSideMenu"
+                                            @click.away="openSideMenu = ! openSideMenu"
+                                            @keydown.escape.window="openSideMenu =  false"
+                                          class="w-40 absolute bg-white shadow-md ml-0 mr-20 top-10 md:mr-0 md:ml-40">
                                               <ul>
-                                                  <li class="p-3 hover:bg-gray-100">Lock The Idea</li>
-                                                  <li class="p-3 hover:bg-gray-100 hover:text-red-600">Delete The Idea</li>
+                                                    <li 
+                                                    class="p-3 hover:bg-gray-100"
+                                                    x-data
+                                                    @click="$dispatch('foo')"
+                                                    >
+                                                    Edit The Idea
+                                                    </li>
+                                                    <li class="p-3 hover:bg-gray-100">Lock The Idea</li>
+                                                    <li class="p-3 hover:bg-gray-100 hover:text-red-600">Delete The Idea</li>
                                               </ul>
                                           </div>
                                           
@@ -56,6 +71,10 @@
                 </div>
             </div>
         {{-- end of single idea  --}}
+
+        {{-- idea edit modal  --}}
+                <livewire:idea.idea-edit-model />
+        {{-- idea edit modal  --}}
 
         {{-- start of buttons --}}
             <div class="buttons-section w-full flex justify-between mt-4   ">
