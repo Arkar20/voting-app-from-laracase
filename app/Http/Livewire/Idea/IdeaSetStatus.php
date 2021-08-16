@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Idea;
 use App\Models\Idea;
 use Livewire\Component;
 use Illuminate\Support\Facades\Mail;
+use App\Jobs\NotifyVotersOnStatusChange;
 use App\Mail\IdeaSendEmailOnChangeStatus;
 
 class IdeaSetStatus extends Component
@@ -24,22 +25,9 @@ class IdeaSetStatus extends Component
     public function statusChange()
     {
         if ($this->notify_voters) {
-            $this->idea
-                ->votes()
-                ->select('name', 'email')
-                ->chunk(100, function ($voters) {
-                    foreach ($voters as $voter) {
-                        Mail::to($voter)
-                        ->subject("Status Has Changed")
-                        ->queue(
-                            new IdeaSendEmailOnChangeStatus($this->idea)
-                        );
-                    }
-                });
+            NotifyVotersOnStatusChange::dispatch($this->idea);
         }
-        $this->idea->update([
-            'status_id' => $this->status,
-        ]);
+        $this->idea->updateVote($this->status);
         $this->emit('statusHasChanged');
     }
 

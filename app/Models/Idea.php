@@ -101,4 +101,11 @@ class Idea extends Model
             ->get()
             ->toArray();
     }
+    // updaing the vote's status
+    public function updateVote($status)
+    {
+        $this->update([
+            'status_id' => $status,
+        ]);
+    }
 }
