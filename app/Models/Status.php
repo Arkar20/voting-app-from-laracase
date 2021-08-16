@@ -17,6 +17,7 @@ class Status extends Model
             'Open' => 'bg-green-400',
             'Closed' => 'bg-red-400',
             'In Progress' => 'bg-yellow-400',
+            'Implemented' => 'bg-blue-400',
         ];
 
         return $attributes[$this->name];

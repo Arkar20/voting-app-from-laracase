@@ -29,6 +29,9 @@
                                 <div class="text-gray-900">3 Comments</div>
                         </div>
                           <div class="ml-4 h-100 flex items-center align-bottom">
+                              <button class=" {{$idea->status->getClasses()}} w-24 rounded-3xl h-8  text-xs text-white   transition ease-in duration-400">
+                                    {{$idea->status->name}}</button>
+                                </button>
                                 <button class="py-1  md:mr-10 relative w-10 rounded-3xl flex justify-center items-center transition duration-150 text-xs bg-gray-300 hover:bg-gray-400">
                                         <svg  xmlns="http://www.w3.org/2000/svg" width="15" height="4" viewBox="0 0 27 6">
                                             <g id="Icon_feather-more-horizontal" data-name="Icon feather-more-horizontal" transform="translate(-4.5 -15)">
@@ -97,66 +100,13 @@
                                      </form>
                                  </div>
                         </div>
-                        <div 
-                        x-data="{openSideMenu:false}"
-                        class="relative">
-                             <button
-                                @click="openSideMenu=!openSideMenu"
-                                 type="submit"
-                                 class="  justify-between h-11 text-xs bg-gray-400 text-white font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3"
-                             >
-                             <div class="flex space-x-4">
-                                 <span class="ml-1">Set Status</span>
-                                 <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                                 </svg>
-                             </div>
-                             </button>
-
-                                 <div 
-                                        x-cloak  
-                                            x-show.transition.top.left.duration.200ms="openSideMenu"
-                                            @click.away="openSideMenu = ! openSideMenu"
-                                            @keydown.escape.window="openSideMenu =  false"
-                                 class="absolute top-10 z-10 bg-white rounded-lg shadow-xl font-normal text-black w-56 py-1 px-2">
-                                    <ul>
-                                        <li class="py-4 px-2 flex justify-center space-x-4">
-                                            <input type="radio" name="option1" checked="" class="text-green-400 border-none"/>
-                                           <span>Option 1</span>
-                                        </li>
-                                        <li class="py-4 px-2 flex justify-center space-x-4">
-                                            <input type="radio" name="option1" class=" focus:bg-blue-400"/>
-                                           <span>Option 1</span>
-                                        </li>
-                                        <li class="py-4 px-2 flex justify-center space-x-4">
-                                            <input type="radio" name="option1" class=" focus:bg-blue-400"/>
-                                           <span>Option 1</span>
-                                        </li>
-                                        <li class="py-4 px-2 flex justify-center space-x-4">
-                                            <input type="radio" name="option1" class=" focus:bg-blue-400"/>
-                                           <span>Option 1</span>
-                                        </li>
-                                    </ul>
-                                    <textarea name="reply"
-                                            class="w-full border border-1 border-gray-200 rounded-lg shadow-md focus:border-green-400 placeholder-gray-200"
-                                            rows="3"
-                                            placeholder="Add an tag (Optional)"
-                                            ></textarea>
-                                    <div class="flex justify-between mt-3">
-                                                <button class="flex items-center justify-center h-11 text-xs bg-gray-400 text-white font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3">
-                                                        Attach
-                                                </button>
-                                                <button
-                                                    type="submit"
-                                                    class="flex items-center justify-center h-11 text-xs bg-blue-400 text-white font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3"
-                                                >
-                                                    <span class="ml-1">Submit</span>
-                                                </button>
-                                        </div>
-                                </div>
-
-                             </button>
-                        </div>
+                        {{-- status component  --}}
+                        @if (auth()->check() && auth()->user()->isAdmin())
+                            <livewire:idea.idea-set-status  :idea="$idea"/>
+                        @endif
+                        {{-- status component  --}}
+                        
+                       
                          
                     </div>
                 </div>

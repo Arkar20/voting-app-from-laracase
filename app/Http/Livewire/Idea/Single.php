@@ -13,15 +13,18 @@ class Single extends Component
     public $votes_count;
     public $hasVoted;
 
-    public function render()
-    {
-        return view('livewire.idea.single');
-    }
+    protected $listeners = ['statusHasChanged'];
+
     public function mount($idea)
     {
         $this->idea = $idea;
         $this->votes_count = $idea->votes_count;
         $this->hasVoted = $idea->isVoted();
+    }
+
+    public function statusHasChanged()
+    {
+        $this->idea->refresh();
     }
     public function handleVote()
     {
@@ -45,5 +48,9 @@ class Single extends Component
             $this->votes_count++;
             $this->hasVoted = true;
         }
+    }
+    public function render()
+    {
+        return view('livewire.idea.single');
     }
 }
