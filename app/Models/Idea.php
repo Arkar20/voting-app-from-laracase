@@ -30,6 +30,11 @@ class Idea extends Model
             ],
         ];
     }
+    // goback url ]
+    public function goBack()
+    {
+        return url()->previous();
+    }
     public function user()
     {
         return $this->belongsTo(User::class);
