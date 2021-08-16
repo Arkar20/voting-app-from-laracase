@@ -31,7 +31,7 @@
                                  <ul>
                                     @foreach (App\Models\Status::all() as $status)
                                         <li class="py-4 px-2 flex justify-between space-x-4">
-                                            <input type="radio" value="{{$status->id}}"  class="text-green-400" wire:model='status'/>
+                                            <input type="radio" value="{{$status->id}}"  class="text-green-400" wire:model='status' checked="{{$status}}"/>
                                              <span class="w-3/4 text-left">{{$status->name}}</span>
                                         </li>
                                     @endforeach
@@ -52,7 +52,12 @@
                                                 >
                                                     <span class="ml-1">Submit</span>
                                                 </button>
-                                        </div>
+                                            </div>
+                                            <input 
+                                            wire:model="notify_voters"
+                                            type="checkbox" 
+                                            class="m-3"
+                                            >Notify All Voters
                                     </form>   
                                     
                                 </div>
