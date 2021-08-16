@@ -6,23 +6,51 @@ use App\Models\Idea;
 use App\Models\votes;
 use App\Models\Status;
 use Livewire\Component;
+use App\Models\Category;
 use Livewire\WithPagination;
 
 class Ideas extends Component
 {
     use WithPagination;
 
+    public $category;
+    public $status;
+
+    protected $queryString = ['status', 'category'];
+
+    protected $listeners = ['FilterStatusChanged'];
+
+    public function FilterStatusChanged($newStatus)
+    {
+        if ($newStatus === 'All Ideas') {
+            $this->status = null;
+        } else {
+            $this->status = $newStatus;
+        }
+        $this->resetPage();
+    }
+
     public function render()
     {
         $statuses = Status::all()->pluck('id', 'name');
-        $status = request()->get('status');
+        $categories = Category::all()->pluck('id', 'name');
 
         return view('livewire.idea.ideas', [
-            'ideas' => Idea::when($status && $status !== 'All', function (
-                $query
-            ) use ($statuses, $status) {
-                return $query->where('status_id', $statuses->get($status));
-            })
+            'ideas' => Idea::when(
+                $this->status && $this->status !== 'All',
+                function ($query) use ($statuses) {
+                    return $query->where(
+                        'status_id',
+                        $statuses->get($this->status)
+                    );
+                }
+            )
+                ->when($this->category, function ($query) use ($categories) {
+                    return $query->where(
+                        'category_id',
+                        $categories->get($this->category)
+                    );
+                })
                 ->addSelect([
                     'voted_at_id' => votes::select('id')
                         ->where('user_id', auth()->id())
@@ -30,6 +58,7 @@ class Ideas extends Component
                 ])
                 ->latest()
                 ->simplePaginate(10),
+            'categories' => Category::all(),
         ]);
     }
 }

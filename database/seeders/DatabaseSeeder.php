@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        $statuses = ['Open', 'Closed', 'In Progress'];
+        $statuses = ['Open', 'Closed', 'In Progress', 'Implemented'];
         foreach ($statuses as $status) {
             Status::create(['name' => $status]);
         }

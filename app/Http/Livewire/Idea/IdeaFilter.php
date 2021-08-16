@@ -13,22 +13,20 @@ class IdeaFilter extends Component
     public $status;
     public $statusCounts;
 
-    protected $queryString = ['status'];
+    // protected $queryString = ['status'];
 
-    public function mounted()
-    {
-        if (Route::currentRouteName() === 'idea.show') {
-            $this->status = null;
-            $this->queryString = [];
-        }
-    }
+    // public function mounted()
+    // {
+    //     if (Route::currentRouteName() === 'idea.show') {
+    //         $this->status = null;
+    //         $this->queryString = [];
+    //     }
+    // }
 
     public function setStatus($status = null)
     {
-        // dd(Route::previous()->getName());
-
-        $this->status = $status;
-
+        // $this->status = $status;
+        $this->emit('FilterStatusChanged', $status);
         if (
             app('router')
                 ->getRoutes()
