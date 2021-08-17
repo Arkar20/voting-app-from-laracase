@@ -32,8 +32,12 @@ class Ideas extends Component
 
     public function render()
     {
-        $statuses = Status::all()->pluck('id', 'name');
-        $categories = Category::all()->pluck('id', 'name');
+        $statuses = cache()
+            ->get('statuses')
+            ->pluck('id', 'name');
+        $categories = cache()
+            ->get('categories')
+            ->pluck('id', 'name');
 
         return view('livewire.idea.ideas', [
             'ideas' => Idea::when(
@@ -58,7 +62,6 @@ class Ideas extends Component
                 ])
                 ->latest()
                 ->simplePaginate(10),
-            'categories' => Category::all(),
         ]);
     }
 }

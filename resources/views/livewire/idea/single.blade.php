@@ -63,7 +63,10 @@
                                             
                                                      <li class="p-3 hover:bg-gray-100">Lock The Idea</li>
                                             
-                                                      <li class="p-3 hover:bg-gray-100 hover:text-red-600">Delete The Idea</li>
+                                                      <li
+                                                         x-data
+                                                        @click="$dispatch('ideadeleted')"
+                                                      class="p-3 hover:bg-gray-100 hover:text-red-600">Delete The Idea</li>
                                               </ul>
                                           </div>
                                           
@@ -79,6 +82,12 @@
         {{-- idea edit modal  --}}
                 <livewire:idea.idea-edit-model :idea="$idea"/>
         {{-- idea edit modal  --}}
+
+        {{-- idea delete modal  --}}
+                <livewire:idea.idea-delete-modal :idea="$idea"/>
+        {{-- idea delete modal  --}}
+
+        
 
         {{-- start of buttons --}}
             <div class="buttons-section w-full flex justify-between mt-4   ">
@@ -99,7 +108,7 @@
                                             x-show.transition.top.left.duration.200ms="openSideMenu"
                                             @click.away="openSideMenu = ! openSideMenu"
                                             @keydown.escape.window="openSideMenu =  false"
-                                 class="z-10  absolute w-80 bg-white rounded-md shadow-lg border border-1 border-gray-200 py-1 px-2">
+                                            class="z-10  absolute w-80 bg-white rounded-md shadow-lg border border-1 border-gray-200 py-1 px-2">
                                      <form action="#" class="space-y-2">
                                             <textarea name="reply"
                                             class="w-full border border-1 border-gray-200 rounded-lg shadow-md focus:border-green-400"

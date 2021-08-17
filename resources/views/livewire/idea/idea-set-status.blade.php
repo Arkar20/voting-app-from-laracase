@@ -1,5 +1,4 @@
  <div 
-
             x-data="{openSideMenu:false}"
             x-init="
             
@@ -29,7 +28,7 @@
                                  class="absolute top-10 z-10 bg-white rounded-lg shadow-xl font-normal text-black w-56 py-1 px-2">
                                  <form wire:submit.prevent='statusChange'>
                                  <ul>
-                                    @foreach (App\Models\Status::all() as $status)
+                                    @foreach ($statuses as $status)
                                         <li class="py-4 px-2 flex justify-between space-x-4">
                                             <input type="radio" value="{{$status->id}}"  class="text-green-400" wire:model='status' checked="{{$status}}"/>
                                              <span class="w-3/4 text-left">{{$status->name}}</span>

@@ -65,7 +65,7 @@ class IdeaPolicy
      */
     public function delete(User $user, Idea $idea)
     {
-        //
+        return $idea->user->is($user);
     }
 
     /**
