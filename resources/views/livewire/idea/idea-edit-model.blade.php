@@ -1,6 +1,13 @@
-<div x-data="{showModal:false}"
+<div 
+x-cloak
+x-data="{showModal:false}"
    @foo.window="showModal=true"
+x-init="
+  window.livewire.on('ideaUpdated',()=>{
+    showModal= false
+  })
 
+"
 >
 <!-- This example requires Tailwind CSS v2.0+ -->
 <div
@@ -57,36 +64,48 @@
                 </div>     
             {{-- start of vote edit form  --}}
                 <div class="vote-title py-4 space-y-2">
-                    <h1 class="text-center text-xl ">Add and idea</h1>
-                    <h1 class="text-center text-xs w-full ">Let Us know what you would like and we will take over</h1>
+                    <h1 class="text-center text-xl ">Edit idea</h1>
+                    <h1 class="text-center text-xs w-full ">You can only edit within an hour after you have created</h1>
                 </div>
-                <form class="flex-col space-y-2" action="{{route('idea.store')}}" method="post">
-                    @csrf
+                <form class="flex-col space-y-2"  wire:submit.prevent='updateIdea'>
 
                     <div>
                         <input type="text" 
                             class="w-full  border-1 focus:border-green-400 rounded-3xl  border-gray-200 bg-gray-100 text-gray-800"
                             placeholder="Enter your Ideas"
                             name="title"
+                            wire:model.defer="title"
                             />
+                           @error('title')
+                              <span class="text-red-500 text-sm p-3 ">{{$message}}</span>
+                           @enderror 
                     </div>
                     <div>
-                        {{-- <select 
+                        <select 
                             class="w-full border-1 rounded-3xl focus:border-green-400   border-gray-200 bg-gray-100 text-gray-800"
                             placeholder="Enter your Ideas"
+                            wire:model="category_id"
                             >
-                           
-                            <option>Categroy</option>
-                        </select> --}}
+                          @foreach(App\Models\Category::all() as $category) 
+                            <option value="{{$category->id}}"  >{{$category->name}}</option>
+                          @endforeach
+                          </select>  
+                           @error('category_id')
+                              <span class="text-red-500 text-sm p-3 ">{{$message}}</span>
+                           @enderror 
                     </div>
                     <div>
                         <textarea  
-                            class="w-full border-1 rounded-3xl  focus:border-green-400  border-gray-200 bg-gray-100 text-gray-800"
+                            class="w-full border-1 text-left rounded-3xl  focus:border-green-400  border-gray-200 bg-gray-100 text-gray-800"
                             rows="6"
-                            placeholder="Describe YOurself"
                             name="desc"
+                            wire:model='desc'
                             >
+                           
                         </textarea>
+                         @error('desc')
+                              <span class="text-red-500 text-sm p-3 ">{{$message}}</span>
+                           @enderror 
                     </div>
                     <div class="flex justify-end space-x-6">
                         <button class="flex items-center justify-center h-11 text-xs bg-gray-400 text-white font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3">

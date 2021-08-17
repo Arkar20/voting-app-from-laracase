@@ -13,7 +13,10 @@ class Single extends Component
     public $votes_count;
     public $hasVoted;
 
-    protected $listeners = ['statusHasChanged'];
+    protected $listeners = [
+        'statusHasChanged',
+        'ideaUpdated' => 'statusHasChanged',
+    ];
 
     public function mount($idea)
     {

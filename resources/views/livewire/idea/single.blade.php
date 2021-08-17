@@ -51,15 +51,19 @@
                                             @keydown.escape.window="openSideMenu =  false"
                                           class="w-40 absolute bg-white shadow-md ml-0 mr-20 top-10 md:mr-0 md:ml-40">
                                               <ul>
+                                                @can('update',$idea)
                                                     <li 
-                                                    class="p-3 hover:bg-gray-100"
-                                                    x-data
-                                                    @click="$dispatch('foo')"
-                                                    >
-                                                    Edit The Idea
+                                                        class="p-3 hover:bg-gray-100"
+                                                        x-data
+                                                        @click="$dispatch('foo')"
+                                                        >
+                                                        Edit The Idea
                                                     </li>
-                                                    <li class="p-3 hover:bg-gray-100">Lock The Idea</li>
-                                                    <li class="p-3 hover:bg-gray-100 hover:text-red-600">Delete The Idea</li>
+                                                @endcan       
+                                            
+                                                     <li class="p-3 hover:bg-gray-100">Lock The Idea</li>
+                                            
+                                                      <li class="p-3 hover:bg-gray-100 hover:text-red-600">Delete The Idea</li>
                                               </ul>
                                           </div>
                                           
@@ -73,7 +77,7 @@
         {{-- end of single idea  --}}
 
         {{-- idea edit modal  --}}
-                <livewire:idea.idea-edit-model />
+                <livewire:idea.idea-edit-model :idea="$idea"/>
         {{-- idea edit modal  --}}
 
         {{-- start of buttons --}}

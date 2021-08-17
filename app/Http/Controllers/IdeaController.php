@@ -33,7 +33,7 @@ class IdeaController extends Controller
             'desc' => $request->desc,
             'category_id' => 1,
             'status_id' => 1,
-            'user_id' => 1,
+            'user_id' => auth()->id(),
         ]);
 
         return back();

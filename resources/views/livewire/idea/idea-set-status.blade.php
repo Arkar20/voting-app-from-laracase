@@ -1,12 +1,12 @@
  <div 
 
-                        x-data="{openSideMenu:false}"
-                        x-init="
-                        
-                            window.livewire.on('statusHasChanged',()=>{
-                                openSideMenu = false
-                            })
-                        "
+            x-data="{openSideMenu:false}"
+            x-init="
+            
+                window.livewire.on('statusHasChanged',()=>{
+                    openSideMenu = false
+                })
+            "
                         class="relative">
                              <button
                                 @click="openSideMenu=!openSideMenu"
