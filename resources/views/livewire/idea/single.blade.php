@@ -13,6 +13,9 @@
                       
                         <div class="">
                             <p class="font-semibold text-3xl">{{$idea->title}}</p>
+                            @can('view',$idea)
+                                <span class="text-xs text-red-400">Span Reports : {{$idea->spam_count}}</span>
+                            @endcan
                             <p class="mt-3 line-clamp-3">
                                 {{$idea->desc}}
                             </p>
@@ -60,13 +63,28 @@
                                                         Edit The Idea
                                                     </li>
                                                 @endcan       
-                                            
-                                                     <li class="p-3 hover:bg-gray-100">Lock The Idea</li>
-                                            
-                                                      <li
+                                                @can('delete',$idea) 
+                                                  <li
                                                          x-data
                                                         @click="$dispatch('ideadeleted')"
                                                       class="p-3 hover:bg-gray-100 hover:text-red-600">Delete The Idea</li>
+                                                    
+                                                @endcan
+
+                                                @can('view',$idea)
+                                                     <li 
+                                                     x-data 
+                                                     @click="$dispatch('markasspam')"
+                                                     class="p-3 hover:bg-gray-100">Mark Spam</li>
+                                                @endcan
+
+                                                @can('viewAny',$idea)
+                                                     <li 
+                                                     x-data 
+                                                     @click="$dispatch('unmarkasspam')"
+                                                     class="p-3 hover:bg-gray-100">Unmark As Spam</li>
+                                                @endcan
+                                                    
                                               </ul>
                                           </div>
                                           
@@ -76,17 +94,29 @@
                           </div>
                     </div>
                 </div>
-            </div>
-        {{-- end of single idea  --}}
 
+                 {{-- end of buttons --}}
         {{-- idea edit modal  --}}
                 <livewire:idea.idea-edit-model :idea="$idea"/>
         {{-- idea edit modal  --}}
 
         {{-- idea delete modal  --}}
                 <livewire:idea.idea-delete-modal :idea="$idea"/>
-        {{-- idea delete modal  --}}
+                {{-- idea spam modal  --}}  
+                
+                {{-- idea delete modal  --}}
+                <livewire:idea.idea-mark-as-spam :idea="$idea"/>
+                {{-- idea spam modal  --}}
 
+
+                <livewire:idea.idea-unmark-as-spam :idea="$idea" />
+            </div>
+
+        {{-- end of single idea  --}}
+
+       
+
+      
         
 
         {{-- start of buttons --}}
@@ -155,5 +185,6 @@
                    </div>
                 </div>
             </div>
-        {{-- end of buttons --}}
+       
+              
 </div>

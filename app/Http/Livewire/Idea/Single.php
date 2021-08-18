@@ -14,8 +14,10 @@ class Single extends Component
     public $hasVoted;
 
     protected $listeners = [
-        'statusHasChanged',
-        'ideaUpdated' => 'statusHasChanged',
+        'statusHasChanged' => 'componentRefresh',
+        'ideaUpdated' => 'componentRefresh',
+        'spamCountHasIncreased' => 'componentRefresh',
+        'spamUnmark' => 'componentRefresh',
     ];
 
     public function mount($idea)
@@ -25,7 +27,7 @@ class Single extends Component
         $this->hasVoted = $idea->isVoted();
     }
 
-    public function statusHasChanged()
+    public function componentRefresh()
     {
         $this->idea->refresh();
     }

@@ -3,7 +3,7 @@ x-cloak
 x-data="{showModal:false}"
 @foo.window="
 showModal=true
-
+$nextTick(()=>{$refs.editinput.focus()})
 "
 x-init="
   window.livewire.on('ideaUpdated',()=>{

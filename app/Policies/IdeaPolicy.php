@@ -18,7 +18,7 @@ class IdeaPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->isAdmin();
     }
 
     /**
@@ -30,7 +30,7 @@ class IdeaPolicy
      */
     public function view(User $user, Idea $idea)
     {
-        //
+        return $idea->user->is($user) || $user->isAdmin();
     }
 
     /**
