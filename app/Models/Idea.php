@@ -22,6 +22,7 @@ class Idea extends Model
     protected $withCount = ['votes'];
 
     public static $PAGINATED_NUMBER = 10;
+
     public function sluggable(): array
     {
         return [
@@ -30,6 +31,15 @@ class Idea extends Model
             ],
         ];
     }
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($idea) {
+            votes::where('idea_id', $idea->id)->delete();
+        });
+    }
+
     // goback url ]
     public function goBack()
     {

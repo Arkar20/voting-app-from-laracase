@@ -144,6 +144,13 @@
                     {{ $slot }}
                 </div>
             </div>
+
+          
+
+            <x-toast-notification 
+                   
+            />
+
         </main>
     </body>
     @livewireScripts

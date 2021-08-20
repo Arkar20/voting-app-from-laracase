@@ -5,7 +5,7 @@
             <select 
             wire:model="category"
             name="category" id="category"  class="w-full rounded-xl border-none px-4 py-2">
-                    <option value=" ">Filter By Category</option>
+                    <option value="All">All Category</option>
               
             @foreach ($categories as $category )
                     <option value="{{$category->name}}">{{$category->name}}</option>

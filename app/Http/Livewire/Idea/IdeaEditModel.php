@@ -44,7 +44,7 @@ class IdeaEditModel extends Component
             'category_id' => $this->category_id,
         ]);
 
-        $this->emit('ideaUpdated'); //close the modal and refrese the idea show component
+        $this->emit('ideaUpdated', 'Idea Has Updated Successfully!'); //close the modal and refrese the idea show component
     }
 
     public function render()

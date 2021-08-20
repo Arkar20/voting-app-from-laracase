@@ -36,6 +36,6 @@ class IdeaController extends Controller
             'user_id' => auth()->id(),
         ]);
 
-        return redirect('/');
+        return redirect('/')->with('success', 'Idea Has Created Successfully!');
     }
 }

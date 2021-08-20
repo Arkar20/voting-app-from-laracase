@@ -20,9 +20,19 @@ class Ideas extends Component
 
     protected $listeners = ['FilterStatusChanged'];
 
+    public function updatedCategory()
+    {
+        if ($this->category == 'All') {
+            $this->category = null;
+        }
+        $this->resetPage();
+    }
+
     public function FilterStatusChanged($newStatus)
     {
         if ($newStatus === 'All Ideas') {
+            $this->status = null;
+        } elseif ($newStatus === 'All Ideas') {
             $this->status = null;
         } else {
             $this->status = $newStatus;

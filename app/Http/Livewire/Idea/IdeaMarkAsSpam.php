@@ -21,7 +21,7 @@ class IdeaMarkAsSpam extends Component
             abort(400);
         }
         $this->idea->increment('spam_count');
-        $this->emit('spamCountHasIncreased');
+        $this->emit('spamCountHasIncreased', 'This Idea Has Marked As Spam!');
     }
     public function render()
     {
