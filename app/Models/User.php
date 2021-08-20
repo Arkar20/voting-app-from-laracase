@@ -43,4 +43,8 @@ class User extends Authenticatable
     {
         return in_array($this->email, ['admin@admin.com']);
     }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

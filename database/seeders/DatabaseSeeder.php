@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Idea;
 use App\Models\votes;
 use App\Models\Status;
+use App\Models\Comment;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -36,5 +38,11 @@ class DatabaseSeeder extends Seeder
                 }
             }
         }
+        // for votes for even user_ids
+
+        // for commnet
+        Comment::factory(10)->create([
+            'idea_id' => Idea::latest()->first()->id,
+        ]);
     }
 }

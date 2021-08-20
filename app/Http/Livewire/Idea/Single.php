@@ -18,6 +18,7 @@ class Single extends Component
         'ideaUpdated' => 'componentRefresh',
         'spamCountHasIncreased' => 'componentRefresh',
         'spamUnmark' => 'componentRefresh',
+        'commented' => 'componentRefresh',
     ];
 
     public function mount($idea)

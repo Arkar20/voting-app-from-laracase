@@ -29,7 +29,7 @@
                                 <div>&bull;</div>
                                 <div>{{$idea->category->name}}</div>
                                 <div>&bull;</div>
-                                <div class="text-gray-900">3 Comments</div>
+                                <div class="text-gray-900">{{$idea->comments_count}} Comments</div>
                         </div>
                           <div class="mx-4 h-100 flex items-center align-bottom space-x-3">
                               <button class=" {{$idea->status->getClasses()}} w-24 rounded-3xl h-8  text-xs text-white   transition ease-in duration-400">
@@ -124,52 +124,24 @@
                 <div class="left ">
                     <div class="flex space-x-1">
                         <div 
-                         x-data="{openSideMenu:false}"
                         class="relative">
                                     <button
-                                        @click="openSideMenu = ! openSideMenu"
+                                             x-data
+                                            @click="$dispatch('opencommentbox')"
                                             type="submit"
                                             class="flex items-center w-12 md:w-full  justify-center h-11 text-xs bg-blue-400 text-white font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3"
                                         >
                                      <span class="ml-1">Reply</span>
                                  </button>
-                                 <div 
-                                          x-cloak  
-                                            x-show.transition.top.left.duration.200ms="openSideMenu"
-                                            @click.away="openSideMenu = ! openSideMenu"
-                                            @keydown.escape.window="openSideMenu =  false"
-                                            class="z-10  absolute w-80 bg-white rounded-md shadow-lg border border-1 border-gray-200 py-1 px-2">
-                                     <form action="#" class="space-y-2">
-                                            <textarea name="reply"
-                                            class="w-full border border-1 border-gray-200 rounded-lg shadow-md focus:border-green-400"
-                                            rows="3"
-                                            placeholder="Reply Your Message"
-                                            ></textarea>
-                                            <div class="flex space-x-4">
-                                                    <button
-                                                            type="submit"
-                                                            class="flex items-center justify-center h-11 text-xs bg-blue-400 text-white font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3"
-                                                        >
-                                                    <span class="ml-1">Post Comment</span>
-                                                </button>
-                                                    <button
-                                                            type="submit"
-                                                            class="flex items-center justify-center h-11 text-xs bg-gray-400 text-white font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3"
-                                                        >
-                                                    <span class="ml-1">Attach</span>
-                                                </button>
-                                            </div>
-                                     </form>
-                                 </div>
+                                 {{-- start of comment section  --}}
+                                 <livewire:idea.idea-comment :idea="$idea"/>
+                                 {{--end of  comment section  --}}
                         </div>
                         {{-- status component  --}}
                         @if (auth()->check() && auth()->user()->isAdmin())
                             <livewire:idea.idea-set-status  :idea="$idea"/>
                         @endif
                         {{-- status component  --}}
-                        
-                       
-                         
                     </div>
                 </div>
                 <div class="right-btngp ">

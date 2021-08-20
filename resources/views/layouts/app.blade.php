@@ -145,11 +145,7 @@
                 </div>
             </div>
 
-          
-
-            <x-toast-notification 
-                   
-            />
+            <x-toast-notification />
 
         </main>
     </body>

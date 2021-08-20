@@ -5,8 +5,10 @@ namespace App\Models;
 use App\Models\User;
 use App\Models\votes;
 use App\Models\Status;
+use App\Models\Comment;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use App\Exceptions\RegisterException;
 use App\Exceptions\RemoveVoteException;
 use Illuminate\Database\Eloquent\Model;
@@ -19,9 +21,14 @@ class Idea extends Model
 
     protected $guarded = [];
     protected $with = ['category', 'status'];
-    protected $withCount = ['votes'];
+    protected $withCount = ['votes', 'comments'];
 
     public static $PAGINATED_NUMBER = 10;
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 
     public function sluggable(): array
     {
@@ -116,6 +123,18 @@ class Idea extends Model
     {
         $this->update([
             'status_id' => $status,
+        ]);
+    }
+    //adding comments
+    public function addComment($comment)
+    {
+        if (auth()->guest()) {
+            return redirect('/login');
+        }
+
+        $this->comments()->create([
+            'comment' => $comment,
+            'user_id' => auth()->id(),
         ]);
     }
 }
