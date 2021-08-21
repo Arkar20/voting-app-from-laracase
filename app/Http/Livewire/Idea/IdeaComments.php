@@ -17,6 +17,12 @@ class IdeaComments extends Component
     public function commented()
     {
         $this->idea->refresh();
+        $this->gotoPage(
+            $this->idea
+                ->comments()
+                ->paginate()
+                ->lastPage()
+        );
     }
 
     public function mount(Idea $idea)
@@ -27,7 +33,7 @@ class IdeaComments extends Component
     public function render()
     {
         return view('livewire.idea.idea-comments', [
-            'comments' => $this->idea->comments,
+            'comments' => $this->idea->comments()->paginate(),
             'idea' => $this->idea,
         ]);
     }
