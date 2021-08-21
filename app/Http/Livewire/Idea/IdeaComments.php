@@ -27,10 +27,8 @@ class IdeaComments extends Component
     public function render()
     {
         return view('livewire.idea.idea-comments', [
-            'comments' => $this->idea
-                ->comments()
-                ->latest()
-                ->simplePaginate(10),
+            'comments' => $this->idea->comments,
+            'idea' => $this->idea,
         ]);
     }
 }

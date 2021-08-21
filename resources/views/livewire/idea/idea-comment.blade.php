@@ -1,8 +1,15 @@
 <div x-data="{openSideMenu:false}"
     x-init="
-            window.livewire.on('commented',()=>openSideMenu=false)
+            window.livewire.on('commented',()=>{
+                openSideMenu=false
+            })
+
+
         " 
-    @opencommentbox.window="openSideMenu=true "
+    @opencommentbox.window="
+                            openSideMenu=true
+                            $nextTick(()=>$refs.focusOn.focus())
+                            "
 >
 <div 
             x-cloak  
@@ -14,6 +21,7 @@
                                 wire:submit.prevent="addComment"
                                 class="space-y-2">
                                     <textarea name="reply"
+                                    x-ref="focusOn"
                                     class="w-full border border-1 border-gray-200 rounded-lg shadow-md focus:border-green-400"
                                     rows="3"
                                     wire:model.defer='comment'
