@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Idea;
 
 use App\Models\Idea;
 use Livewire\Component;
+use App\Notifications\CommentAdded;
 
 class IdeaComment extends Component
 {
@@ -18,9 +19,9 @@ class IdeaComment extends Component
     public function addComment()
     {
         // dd($this->idea->comments);
-        $this->idea->addComment($this->comment);
-        $this->reset();
-
+        $newComment = $this->idea->addComment($this->comment);
+        $this->idea->user->notify(new CommentAdded($newComment));
+        $this->comment = '';
         $this->emit('commented', 'Your Comment Has Added!');
     }
     public function render()

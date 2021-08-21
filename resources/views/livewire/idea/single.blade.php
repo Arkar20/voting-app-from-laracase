@@ -1,5 +1,4 @@
 <div>
-  
         {{-- start of single idea  --}}
         <div class="idea-container max-width-100 bg-white rounded-md  shadow-lg flex py-6">
                

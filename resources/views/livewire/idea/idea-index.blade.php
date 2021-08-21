@@ -34,6 +34,8 @@
                     <div class="flex-col md:flex border-3  md:justify-around mt-4 md:mt-10 border-black  ">
                           <div class="flex justify-between px-3 my-3 md:my-0   space-x-4 items-center">
                             <div class="flex justify-between space-x-3 ">
+                            <p class=" rounded-3xl font-bold text-gray-600 text-xs">{{$idea->user->name}}</p>
+                                    <p class="  text-gray-600 text-xs">&bull;</p>
                             <p class=" rounded-3xl  text-gray-600 text-xs">{{$idea->created_at->diffForHumans()}}</p>
                                     <p class="  text-gray-600 text-xs">&bull;</p>
                                   <p class=" rounded-3xl  text-gray-600 text-xs">{{$idea->category->name}}</p>

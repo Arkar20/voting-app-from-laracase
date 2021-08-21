@@ -17,12 +17,24 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
         @livewireStyles
     </head>
-    <body class="font-sans bg-gray-background text-gray-900 text-sm">
+    <body class="font-sans  bg-gray-background text-gray-900 text-sm">
         <header class="flex flex-col md:flex-row items-center justify-between px-8 py-4">
             <a href="#" class="uppercase text-2xl text-gray-400">Arkar 
                 <span class="text-green-600 font-bold ">Voting</span>
                 App</a>
             <div class="flex items-center mt-2 md:mt-0">
+                <div 
+                x-data
+                @click="$dispatch('open-noti-box')"
+                class="relative hover:bg-gray-200 cursor-pointer ">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                     </svg>
+                        <div class="absolute -top-2 -right-2 w-4 h-4 rounded-full bg-red-600 flex items-center justify-center">
+                            <span class="text-white text-xs">0</span>
+                        </div>
+                </div>
+
                 @if (Route::has('login'))
                     <div class="px-6 py-4">
                         @auth
@@ -50,7 +62,7 @@
             </div>
         </header>
 
-        <main class="container mx-auto max-w-custom flex flex-col md:flex-row">
+        <main class="container mx-auto max-w-custom flex flex-col md:flex-row relative">
             <div class="w-70 mx-auto md:mx-0 md:mr-5 bg-white shadow-sm border-green-300">
             
 
@@ -146,8 +158,12 @@
             </div>
 
             <x-toast-notification />
-
+           {{-- start of notification  --}}
+            <livewire:idea.comment-notification />
+           {{-- end of notification  --}}
         </main>
+       
+
     </body>
     @livewireScripts
 </html>

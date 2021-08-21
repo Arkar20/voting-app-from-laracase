@@ -20,7 +20,7 @@ class Idea extends Model
     use HasFactory, Sluggable;
 
     protected $guarded = [];
-    protected $with = ['category', 'status'];
+    protected $with = ['category', 'status', 'user'];
     protected $withCount = ['votes', 'comments'];
 
     public static $PAGINATED_NUMBER = 10;
@@ -133,7 +133,7 @@ class Idea extends Model
             return redirect('/login');
         }
 
-        $this->comments()->create([
+        return $this->comments()->create([
             'comment' => $comment,
             'user_id' => auth()->id(),
         ]);

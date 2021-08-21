@@ -13,15 +13,17 @@ class IdeaFilter extends Component
     public $status;
     public $statusCounts;
 
-    // protected $queryString = ['status'];
+    protected $listeners = ['statusHasChanged'];
 
-    // public function mounted()
-    // {
-    //     if (Route::currentRouteName() === 'idea.show') {
-    //         $this->status = null;
-    //         $this->queryString = [];
-    //     }
-    // }
+    public function mount()
+    {
+        $this->statusCounts = Idea::getIdeasStatusCounts()[0];
+    }
+
+    public function statusHasChanged()
+    {
+        $this->statusCounts = Idea::getIdeasStatusCounts()[0];
+    }
 
     public function setStatus($status = null)
     {
@@ -39,7 +41,6 @@ class IdeaFilter extends Component
 
     public function render()
     {
-        $this->statusCounts = Idea::getIdeasStatusCounts()[0];
         return view('livewire.idea.idea-filter');
     }
 }
