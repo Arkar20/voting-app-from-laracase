@@ -57,6 +57,16 @@
                                                       Edit The Comment
                                                   </li>
                                                   @endcan
+                                                  @can('update',$comment)
+                                                  <li 
+                                                      class="p-3 hover:bg-gray-100"
+                                                      x-data
+                                                      wire:click="setDeleteComment({{$comment->id}})"
+                                                      @click="$dispatch('commentdelete')"
+                                                      >
+                                                      Delete The Comment
+                                                  </li>
+                                                  @endcan
                                               </ul>
                                           </div>
                                           

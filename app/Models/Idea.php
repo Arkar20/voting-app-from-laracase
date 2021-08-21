@@ -44,6 +44,7 @@ class Idea extends Model
 
         static::deleting(function ($idea) {
             votes::where('idea_id', $idea->id)->delete();
+            $idea->comments()->delete();
         });
     }
 

@@ -25,65 +25,49 @@
                                 src='https://avataaars.io/?avatarStyle=Circle&topType=ShortHairTheCaesarSidePart&accessoriesType=Sunglasses&hairColor=BrownDark&facialHairType=BeardMajestic&facialHairColor=BrownDark&clotheType=ShirtScoopNeck&clotheColor=Gray01&eyeType=Side&eyebrowType=RaisedExcited&mouthType=Twinkle&skinColor=Light'/>
                         </a>
                 <div class="idea-text flex-col w-full">
-                          <a href="{{route('idea.show',$idea->slug)}}" class="idea-link font-semibold text:2xl md:text-3xl">{{$idea->title}}</a>
-                          <p class="mt-3 line-clamp-3">
-                                 {{$idea->desc}}  
-                        </p>
-                    
-                    <div class="flex-col md:flex-row justify-between mt-4 md:mt-10   ">
-                        <div>
-                            <div class="flex my-3 space-x-4">
-                                  <p class=" rounded-3xl  text-gray-600 text-xs">{{$idea->created_at->diffForHumans()}}</p>
+                  <div>      
+                      <a href="{{route('idea.show',$idea->slug)}}" class="idea-link font-semibold text:2xl md:text-3xl">{{$idea->title}}</a>
+                              <p class="mt-3 line-clamp-3">
+                                    {{$idea->desc}}  
+                            </p>
+                      </div>
+                    <div class="flex-col md:flex border-3  md:justify-around mt-4 md:mt-10 border-black  ">
+                          <div class="flex justify-between px-3 my-3 md:my-0   space-x-4 items-center">
+                            <div class="flex justify-between space-x-3 ">
+                            <p class=" rounded-3xl  text-gray-600 text-xs">{{$idea->created_at->diffForHumans()}}</p>
                                     <p class="  text-gray-600 text-xs">&bull;</p>
                                   <p class=" rounded-3xl  text-gray-600 text-xs">{{$idea->category->name}}</p>
                                     <p class="  text-gray-600 text-xs">&bull;</p>
-                                  <p class=" rounded-3xl  text-gray-800 text-xs">3 comments</p>
+                                  <p class=" rounded-3xl  text-gray-800 text-xs">{{$idea->comments_count}} comments</p>
                             </div>
-                        </div>
-                          <div class="flex items-center h-full space-x-1" 
-                                   
-                                x-data="{ openSideMenu: false }"
-
-                          >
-                          <div class="block md:hidden spacing-x-3 border border-gray-200 ">
+                             <button class="hidden md:block {{$idea->status->getClasses()}} w-20 rounded-3xl h-8  text-xs text-white  hover:text-white hover:bg-green-500 transition ease-in duration-400">
+                                    {{$idea->status->name}}</button>
+                              </button>
+                           
+                             </div>
+                             
+                                  {{-- for mobile  --}}
+                          <div class=" md:hidden flex items-center md:justify-between h-full space-x-4 md:space-x-1" >
+                          <div class=" spacing-x-3 border border-gray-200 ">
                              <p class="text-center uppercase text-lg leading-none">12 </p>
                              <p class="text-center uppercase text-3xs text-gray-500 leading-none">Voted</p>
                           </div>
-                          <div class="block md:hidden spacing-x-3 border border-gray-200 ">
+                          <div class=" spacing-x-3 border border-gray-200 ">
                                      <button class=" p-2 bg-gray-200 font-weight-bold border border-gray-200 hover:border-gray-400 transition duration-150 ease-in uppercase rounded-xl">Vote</button>
 
                           </div>
                                 <button class=" {{$idea->status->getClasses()}} w-20 rounded-3xl h-8  text-xs text-white  hover:text-white hover:bg-green-500 transition ease-in duration-400">
                                     {{$idea->status->name}}</button>
                                 </button>
-                                <button
-                                @click="openSideMenu = ! openSideMenu"
-                                class="relative w-10 h-8 rounded-3xl flex justify-center items-center transition duration-150 text-xs bg-gray-300 hover:bg-gray-400">
-                                        <svg  xmlns="http://www.w3.org/2000/svg" width="15" height="4" viewBox="0 0 27 6">
-                                            <g id="Icon_feather-more-horizontal" data-name="Icon feather-more-horizontal" transform="translate(-4.5 -15)">
-                                                <path id="Path_2" data-name="Path 2" d="M19.5,18A1.5,1.5,0,1,1,18,16.5,1.5,1.5,0,0,1,19.5,18Z" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
-                                                <path id="Path_3" data-name="Path 3" d="M30,18a1.5,1.5,0,1,1-1.5-1.5A1.5,1.5,0,0,1,30,18Z" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
-                                                <path id="Path_4" data-name="Path 4" d="M9,18a1.5,1.5,0,1,1-1.5-1.5A1.5,1.5,0,0,1,9,18Z" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
-                                            </g>
-                                          </svg>
-                                          {{-- start of popup     --}}
-                                          <div 
-                                          x-cloak  
-                                            x-show.transition.top.left.duration.200ms="openSideMenu"
-                                            @click.away="openSideMenu = ! openSideMenu"
-                                            @keydown.escape.window="openSideMenu =  false"
-                                          class="w-40 absolute bg-white shadow-md ml-0 mr-20 top-10 md:mr-0 md:ml-40">
-                                              <ul>
-                                                  <li class="p-3 hover:bg-gray-100">Lock The Idea</li>
-                                                  <li class="p-3 hover:bg-gray-100 hover:text-red-600">Delete The Idea</li>
-                                              </ul>
-                                          </div>
-                                          
-                                          {{-- end of popup     --}}
-
-                                </button>
+                                
                           </div>
+                            {{-- for mobile  --}}
+                           
+
                     </div>
+                    
+                 
                 </div>
+                
             </div>
             {{-- end of single card --}}

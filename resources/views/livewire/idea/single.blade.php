@@ -21,21 +21,21 @@
                             </p>
                         </div>
                     </div>
-                    <div class="flex w-full justify-between mt-10 md:mx-2 mx-1 ">
-                        <div class="flex items-center text-xs text-gray-400 font-semibold space-x-2">
-                                <div class="hidden md:block font-bold text-gray-900">John Doe</div>
-                                <div class="hidden md:block">&bull;</div>
-                                <div>{{$idea->created_at->diffForHumans()}}</div>
-                                <div>&bull;</div>
-                                <div>{{$idea->category->name}}</div>
-                                <div>&bull;</div>
-                                <div class="text-gray-900">{{$idea->comments_count}} Comments</div>
-                        </div>
-                          <div class="mx-4 h-100 flex items-center align-bottom space-x-3">
-                              <button class=" {{$idea->status->getClasses()}} w-24 rounded-3xl h-8  text-xs text-white   transition ease-in duration-400">
+                    
+                     <div class="flex-col md:flex border-3  md:justify-around mt-4 md:mt-10 border-black  ">
+                          <div class="flex justify-between px-3 my-3 md:my-0   space-x-4 items-center">
+                            <div class="flex justify-between space-x-3 ">
+                            <p class=" rounded-3xl  text-gray-600 text-xs">{{$idea->created_at->diffForHumans()}}</p>
+                                    <p class="  text-gray-600 text-xs">&bull;</p>
+                                  <p class=" rounded-3xl  text-gray-600 text-xs">{{$idea->category->name}}</p>
+                                    <p class="  text-gray-600 text-xs">&bull;</p>
+                                  <p class=" rounded-3xl  text-gray-800 text-xs">{{$idea->comments_count}} comments</p>
+                            </div>
+                            <div class="flex space-x-3">
+                             <button class="hidden md:block {{$idea->status->getClasses()}} w-20 rounded-3xl h-8  text-xs text-white  hover:text-white hover:bg-green-500 transition ease-in duration-400">
                                     {{$idea->status->name}}</button>
-                                </button>
-                                         <button
+                              </button>
+                            <button
                                             x-data="{openSideMenu:false}"
                                  @click="openSideMenu = ! openSideMenu"
                                 class="relative w-10 h-8 z-10 rounded-3xl flex justify-center items-center transition duration-150 text-xs bg-gray-300 hover:bg-gray-400">
@@ -91,7 +91,22 @@
                                           {{-- end of popup     --}}
 
                                 </button>
+                                </div>
+                             </div>
+                             
+                                  {{-- for mobile  --}}
+                             <div class=" md:hidden flex items-center md:justify-between h-full space-x-4 md:space-x-1" >
+                         
+     
+                                <button class=" {{$idea->status->getClasses()}} w-20 rounded-3xl h-8  text-xs text-white  hover:text-white hover:bg-green-500 transition ease-in duration-400">
+                                    {{$idea->status->name}}</button>
+                                </button>
+                                
+                                
                           </div>
+                            {{-- for mobile  --}}
+                           
+
                     </div>
                 </div>
 

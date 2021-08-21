@@ -26,6 +26,10 @@ class IdeaSingleComment extends Component
     {
         $this->emit('commentToUpdate', $comment);
     }
+    public function setDeleteComment(Comment $comment)
+    {
+        $this->emit('commentTodelete', $comment);
+    }
 
     public function render()
     {

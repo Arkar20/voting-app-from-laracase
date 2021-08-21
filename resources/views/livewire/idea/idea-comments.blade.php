@@ -44,8 +44,10 @@
             <div>
                 {{$comments->onEachSide(1)->links()}}
             </div>
-<livewire:idea.comment-edit />
 
+            <livewire:idea.comment-edit />
+            
+            <livewire:comment-delete />
 
 </div>
 </div>
