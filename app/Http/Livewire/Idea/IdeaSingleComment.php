@@ -9,10 +9,22 @@ use Livewire\Component;
 class IdeaSingleComment extends Component
 {
     public $comment;
+    public $idea;
 
-    public function mount(Comment $comment)
+    protected $listeners = ['commentHasUpdated'];
+
+    public function commentHasUpdated()
+    {
+        $this->comment->refresh();
+    }
+    public function mount(Comment $comment, Idea $idea)
     {
         $this->comment = $comment;
+        $this->idea = $idea;
+    }
+    public function setCommentEditId(Comment $comment)
+    {
+        $this->emit('commentToUpdate', $comment);
     }
 
     public function render()

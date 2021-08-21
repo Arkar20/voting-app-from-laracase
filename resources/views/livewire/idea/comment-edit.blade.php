@@ -1,13 +1,20 @@
 <div 
 x-cloak
 x-data="{showModal:false}"
-@foo.window="
-showModal=true
-$nextTick(()=>{$refs.editinput.focus()})
-"
+
 x-init="
-  window.livewire.on('ideaUpdated',()=>{
+  window.livewire.on('commentHasUpdated',()=>{
     showModal= false
+  })
+
+  window.livewire.on('commentToUpdate',()=>{
+   setTimeout(()=>{
+    showModal= true
+    $nextTick(()=>{$refs.editinput.focus()})
+
+   },200)
+    
+
   })
 
 "
@@ -48,50 +55,26 @@ x-init="
                 </div>     
             {{-- start of vote edit form  --}}
                 <div class="vote-title py-4 space-y-2">
-                    <h1 class="text-center text-xl ">Edit idea</h1>
-                    <h1 class="text-center text-xs w-full ">You can only edit within an hour after you have created</h1>
+                    <h1 class="text-center text-xl ">Edit Comment</h1>
+                    <h1 class="text-center text-xs w-full ">You can only Change Your Comment</h1>
                 </div>
-                <form class="flex-col space-y-2"  wire:submit.prevent='updateIdea'>
+                <form class="flex-col space-y-2"  wire:submit.prevent='updateComment'>
 
-                    <div>
-                        <input type="text" 
-                            class="w-full  border-1 focus:border-green-400 rounded-3xl  border-gray-200 bg-gray-100 text-gray-800"
-                            placeholder="Enter your Ideas"
-                            name="title"
-                            wire:model.defer="title"
-                            x-ref="editinput"
-                            />
-                           @error('title')
-                              <span class="text-red-500 text-sm p-3 ">{{$message}}</span>
-                           @enderror 
-                    </div>
-                    <div>
-                        <select 
-                            class="w-full border-1 rounded-3xl focus:border-green-400   border-gray-200 bg-gray-100 text-gray-800"
-                            placeholder="Enter your Ideas"
-                            wire:model="category_id"
-                            >
-                          @foreach($categories as $category) 
-                            <option value="{{$category->id}}"  >{{$category->name}}</option>
-                          @endforeach
-                          </select>  
-                           @error('category_id')
-                              <span class="text-red-500 text-sm p-3 ">{{$message}}</span>
-                           @enderror 
-                    </div>
+                    @if($comment)
                     <div>
                         <textarea  
+                            x-ref='editinput'
                             class="w-full border-1 text-left rounded-3xl  focus:border-green-400  border-gray-200 bg-gray-100 text-gray-800"
                             rows="6"
                             name="desc"
-                            wire:model='desc'
-                            >
-                           
-                        </textarea>
-                         @error('desc')
+                            placeholder="{{$comment->comment}}"
+                            wire:model="body"
+                        ></textarea>
+                             @error('body')
                               <span class="text-red-500 text-sm p-3 ">{{$message}}</span>
                            @enderror 
                     </div>
+                    @endif
                     <div class="flex justify-end space-x-6">
                         <button class="flex items-center justify-center h-11 text-xs bg-gray-400 text-white font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3">
                                 Attach

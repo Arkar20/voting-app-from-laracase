@@ -14,10 +14,12 @@ class IdeaComment extends Component
     {
         $this->idea = $idea;
     }
+
     public function addComment()
     {
         // dd($this->idea->comments);
         $this->idea->addComment($this->comment);
+        $this->reset();
 
         $this->emit('commented', 'Your Comment Has Added!');
     }

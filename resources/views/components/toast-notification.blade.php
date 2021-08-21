@@ -20,7 +20,7 @@
                         $nextTick(()=>alert('{{session('success')}}'))     
                      @endif
                     
-                     events=['ideaUpdated','spamCountHasIncreased','spamUnmark','commented'];
+                     events=['ideaUpdated','spamCountHasIncreased','spamUnmark','commented','commentHasUpdated'];
 
                     events.forEach(event=>{
                         window.livewire.on(event,(messageFromEvent)=>{
