@@ -23,17 +23,16 @@
                 <span class="text-green-600 font-bold ">Voting</span>
                 App</a>
             <div class="flex items-center mt-2 md:mt-0">
-                <div 
-                x-data
-                @click="$dispatch('open-noti-box')"
-                class="relative hover:bg-gray-200 cursor-pointer ">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                     </svg>
-                        <div class="absolute -top-2 -right-2 w-4 h-4 rounded-full bg-red-600 flex items-center justify-center">
-                            <span class="text-white text-xs">0</span>
-                        </div>
-                </div>
+                @if(auth()->check())
+                
+                   
+                    {{-- start of notification  --}}
+                     <livewire:idea.comment-notification />
+                 {{-- end of notification  --}}
+                    
+                    
+                    
+                @endif
 
                 @if (Route::has('login'))
                     <div class="px-6 py-4">
@@ -158,9 +157,7 @@
             </div>
 
             <x-toast-notification />
-           {{-- start of notification  --}}
-            <livewire:idea.comment-notification />
-           {{-- end of notification  --}}
+             
         </main>
        
 

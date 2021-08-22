@@ -13,6 +13,7 @@ class Comment extends Model
 
     protected $fillable = ['comment', 'idea_id', 'user_id'];
     protected $with = ['user'];
+    protected $perPage = 10;
 
     public function idea()
     {

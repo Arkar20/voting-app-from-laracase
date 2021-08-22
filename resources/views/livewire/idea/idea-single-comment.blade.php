@@ -1,4 +1,6 @@
- <div  class="reply-section isadmin relative flex border border-1 transition duration-500 cursor-pointer   hover:border-green-500 rounded-md shadow-md">
+ <div  
+ id="comment-{{$comment->id}}"
+ class="reply-section isadmin relative flex border border-1 transition duration-500 cursor-pointer   hover:border-green-500 rounded-md shadow-md">
                     <div class="flex-none">
                     
                         <a href="#" class="px-4 flex-none">
