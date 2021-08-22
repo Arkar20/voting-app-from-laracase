@@ -1,7 +1,10 @@
  {{-- start of singel reply   --}}
  <div
- x-data 
+        x-data 
             x-init=" 
+            commentsection = document.querySelector('.isadmin:nth-last-child(4)')
+             console.log(commentsection)
+                         
         Livewire.hook('message.processed', (message, component) => {
                    
              {{--On commented--}}
@@ -10,7 +13,7 @@
                         message.updateQueue[0].payload.event==='commented'
                     )
                     {
-                         commentsection = document.querySelector('.reply-section:nth-last-child(2)')
+                         commentsection = document.querySelector('.reply-section:nth-last-child(4)')
                           console.log(commentsection)
                          commentsection.scrollIntoView({behavior:'smooth'})
                             commentsection.classList.add('bg-green-100')
@@ -45,10 +48,7 @@
       
                      "
  >
-<div 
 
-   
->
     @foreach ($comments as $comment) 
          <livewire:idea.idea-single-comment :comment="$comment"  :idea="$idea" :key="$comment->id"/>  
         @endforeach
@@ -60,5 +60,4 @@
             
             <livewire:comment-delete />
 
-</div>
 </div>

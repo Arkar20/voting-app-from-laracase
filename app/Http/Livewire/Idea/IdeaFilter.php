@@ -12,6 +12,7 @@ class IdeaFilter extends Component
 {
     public $status;
     public $statusCounts;
+    public $param;
 
     protected $listeners = ['statusHasChanged'];
 
@@ -27,8 +28,8 @@ class IdeaFilter extends Component
 
     public function setStatus($status = null)
     {
-        // $this->status = $status;
-        $this->emit('FilterStatusChanged', $status);
+        $this->param = $status;
+
         if (
             app('router')
                 ->getRoutes()
@@ -37,6 +38,7 @@ class IdeaFilter extends Component
         ) {
             return redirect()->route('idea.index', ['status' => $this->status]);
         }
+        $this->emit('FilterStatusChanged', $status);
     }
 
     public function render()
