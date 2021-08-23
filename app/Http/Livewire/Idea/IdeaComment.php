@@ -5,11 +5,17 @@ namespace App\Http\Livewire\Idea;
 use App\Models\Idea;
 use Livewire\Component;
 use App\Notifications\CommentAdded;
+use App\Traits\handleRedirecttrait;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider;
 
 class IdeaComment extends Component
 {
+    use handleRedirecttrait;
+
     public $idea;
     public $comment;
+
+    protected $rules = ['comment' => 'required|min:5'];
 
     public function mount(Idea $idea)
     {
@@ -18,7 +24,8 @@ class IdeaComment extends Component
 
     public function addComment()
     {
-        // dd($this->idea->comments);
+        $this->redirectToLogin();
+        $this->validate();
         $newComment = $this->idea->addComment($this->comment);
         $this->idea->user->notify(new CommentAdded($newComment));
         $this->comment = '';

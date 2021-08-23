@@ -138,4 +138,18 @@ class Idea extends Model
             'user_id' => auth()->id(),
         ]);
     }
+    //refactoring the ideas filter
+    public function scopeIdeaFilter($query, $data, $field)
+    {
+        $statuses = cache()
+            ->get('statuses')
+            ->pluck('id', 'name');
+
+        $query->when($data && $data !== 'All', function ($query) use (
+            $statuses,
+            $data
+        ) {
+            return $query->where('status_id', $statuses->get($data));
+        });
+    }
 }

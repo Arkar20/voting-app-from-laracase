@@ -65,6 +65,7 @@ class CommentAdded extends Notification
             'idea_slug' => $this->comment->idea->slug,
             'idea_desc' => $this->comment->idea->desc,
             'comment_id' => $this->comment->id,
+            'comment' => $this->comment->comment,
         ];
     }
 }

@@ -15,8 +15,10 @@ class Ideas extends Component
 
     public $category;
     public $status;
+    public $sortby = null;
+    public $search;
 
-    protected $queryString = ['status', 'category'];
+    protected $queryString = ['status', 'category', 'sortby', 'search'];
 
     protected $listeners = ['FilterStatusChanged'];
 
@@ -45,9 +47,12 @@ class Ideas extends Component
         $statuses = cache()
             ->get('statuses')
             ->pluck('id', 'name');
+
         $categories = cache()
             ->get('categories')
             ->pluck('id', 'name');
+
+        $categories = Category::all()->pluck('id', 'name');
 
         return view('livewire.idea.ideas', [
             'ideas' => Idea::when(
@@ -59,6 +64,17 @@ class Ideas extends Component
                     );
                 }
             )
+                ->when($this->sortby == 'Top Ideas', function ($query) {
+                    return $query->orderBy('votes_count', 'desc');
+                })
+                ->when($this->sortby == 'My Ideas', function ($query) {
+                    return $query->where('user_id', auth()->id());
+                })
+                ->when(strlen($this->search) > 3, function ($query) {
+                    return $query
+                        ->where('title', 'LIKE', '%' . $this->search . '%')
+                        ->orWhere('desc', 'LIKE', '%' . $this->search . '%');
+                })
                 ->when($this->category, function ($query) use ($categories) {
                     return $query->where(
                         'category_id',

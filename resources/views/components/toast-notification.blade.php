@@ -2,6 +2,7 @@
 
 {{-- pop up toast notification    --}}
             <div
+            x-cloak
              x-data="{
                         isOpen:false,
                         message:'',
@@ -17,7 +18,8 @@
                     }"
              x-init="
                       @if(null !==session('success'))
-                        $nextTick(()=>alert('{{session('success')}}'))     
+                      $nextTick(()=>alert('{{session('success')}}'))     
+                      console.log(message)
                      @endif
                     
                      events=['ideaUpdated','spamCountHasIncreased','spamUnmark','commented','commentHasUpdated','commentHasDelete'];

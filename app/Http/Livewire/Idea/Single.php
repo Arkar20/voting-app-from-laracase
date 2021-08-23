@@ -36,6 +36,8 @@ class Single extends Component
     public function handleVote()
     {
         if (!auth()->check()) {
+            redirect()->setIntendedUrl(url()->previous());
+
             return redirect('/login');
         }
         if ($this->hasVoted) {

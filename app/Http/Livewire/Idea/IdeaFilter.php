@@ -19,6 +19,7 @@ class IdeaFilter extends Component
     public function mount()
     {
         $this->statusCounts = Idea::getIdeasStatusCounts()[0];
+        $this->param = request()->query('status') ?: 'All Ideas';
     }
 
     public function statusHasChanged()

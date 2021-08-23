@@ -27,6 +27,9 @@
                                     wire:model.defer='comment'
                                     placeholder="Reply Your Message"
                                     ></textarea>
+                                    @error('comment')
+                                        <span class="text-red-600 text-xs font-bold">{{$message}}</span>
+                                    @enderror
                                     <div class="flex space-x-4">
                                             <button
                                                     type="submit"

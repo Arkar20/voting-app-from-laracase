@@ -1,4 +1,4 @@
- <div  
+<div  
  id="comment-{{$comment->id}}"
  class="reply-section isadmin relative flex border border-1 transition duration-500 cursor-pointer   hover:border-green-500 rounded-md shadow-md">
                     <div class="flex-none">
@@ -23,8 +23,10 @@
                         <div class="flex items-center text-xs text-gray-400 font-semibold space-x-2">
                             <div class="hidden md:block font-bold text-gray-900">{{$comment->user->name}}</div>
                             <div class="hidden md:block">&bull;</div>
-                                <div class="bg-gray-500 px-2 rounded-lg">author</div>
+                            @if($comment->user_id==$idea->user_id)    
+                            <div class="bg-gray-500 px-2 rounded-lg">author</div>
                                 <div class="hidden md:block">&bull;</div>
+                            @endif
                             <div>{{$comment->created_at->diffForHumans()}}</div>
                             
                           </div>

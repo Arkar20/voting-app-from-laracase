@@ -4,12 +4,14 @@ namespace App\Http\Livewire\Idea;
 
 use App\Models\Idea;
 use Livewire\Component;
+use App\Traits\handleRedirecttrait;
 use Illuminate\Support\Facades\Mail;
 use App\Jobs\NotifyVotersOnStatusChange;
 use App\Mail\IdeaSendEmailOnChangeStatus;
 
 class IdeaSetStatus extends Component
 {
+    use handleRedirecttrait;
     public Idea $idea;
     public $status;
     public $notify_voters;
@@ -24,6 +26,8 @@ class IdeaSetStatus extends Component
     }
     public function statusChange()
     {
+        $this->redirectToLogin();
+
         if ($this->notify_voters) {
             NotifyVotersOnStatusChange::dispatch($this->idea);
         }

@@ -29,14 +29,18 @@ class AppServiceProvider extends ServiceProvider
             $categories = \Cache::rememberForever('categories', function () {
                 return Category::all();
             });
-            $view->with('categories', $categories);
-        });
-
-        view()->composer('*', function ($view) {
             $statuses = \Cache::rememberForever('statuses', function () {
                 return Status::all();
             });
+            $view->with('categories', $categories);
             $view->with('statuses', $statuses);
         });
+
+        // view()->composer('*', function ($view) {
+        //     $statuses = \Cache::rememberForever('statuses', function () {
+        //         return Status::all();
+        //     });
+        //     $view->with('statuses', $statuses);
+        // });
     }
 }
